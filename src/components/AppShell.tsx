@@ -23,7 +23,7 @@ const nav = [
   { to: "/campanas", label: "Campañas", icon: Megaphone, activo: true },
   { to: "/generador", label: "Generador IA", icon: Sparkles, activo: true },
   { to: "/revision", label: "Revisión de mensajes", icon: ClipboardCheck, activo: true },
-  { to: "/", label: "Clientes", icon: Users, activo: false },
+  { to: "/clientes", label: "Clientes y leads", icon: Users, activo: true },
   { to: "/", label: "Productos", icon: Package, activo: false },
   { to: "/", label: "Envíos", icon: Send, activo: false },
   { to: "/", label: "Bandejas", icon: Inbox, activo: false },
