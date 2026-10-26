@@ -1,5 +1,6 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link, useRouter, useRouterState } from "@tanstack/react-router";
 import {
+  ArrowLeft,
   LayoutDashboard,
   Megaphone,
   Sparkles,
@@ -43,7 +44,8 @@ export function AppShell({
   children: ReactNode;
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const { usuarioActual } = useStore();
+  const router = useRouter();
+  const { usuarioActual, fuente } = useStore();
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -94,11 +96,22 @@ export function AppShell({
         <div className="border-t border-sidebar-border px-5 py-4 text-xs">
           <p className="font-medium">{usuarioActual.nombre}</p>
           <p className="text-sidebar-foreground/60">{usuarioActual.rol}</p>
+          <p className="mt-2 text-[11px] text-sidebar-foreground/50">
+            Datos: {fuente === "supabase" ? "Supabase externo" : fuente === "local" ? "demo local" : "cargando…"}
+          </p>
         </div>
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b bg-card/85 px-4 py-3 backdrop-blur md:px-8">
+          <button
+            type="button"
+            aria-label="Volver"
+            onClick={() => (window.history.length > 1 ? router.history.back() : router.navigate({ to: "/" }))}
+            className="grid size-9 shrink-0 place-items-center rounded-md border bg-background text-foreground transition-colors hover:bg-muted"
+          >
+            <ArrowLeft className="size-4" />
+          </button>
           <div className="min-w-0 flex-1">
             <h1 className="truncate text-lg font-semibold md:text-xl">{title}</h1>
             {subtitle ? <p className="truncate text-sm text-muted-foreground">{subtitle}</p> : null}
