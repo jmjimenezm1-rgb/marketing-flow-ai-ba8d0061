@@ -20,6 +20,7 @@ type Store = {
   mensajes: MensajeGenerado[];
   fuente: Fuente;
   usuarioActual: { nombre: string; rol: string };
+  updateCliente: (id: string, patch: Partial<Cliente>, accion: string) => void;
   addCampana: (c: Campana) => void;
   updateCampana: (id: string, patch: Partial<Campana>) => void;
   addMensajes: (m: MensajeGenerado[]) => void;
@@ -104,6 +105,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       mensajes,
       fuente,
       usuarioActual,
+      updateCliente: (id, patch, accion) =>
+        setClientes((prev) =>
+          prev.map((c) => {
+            if (c.id !== id) return c;
+            const n = { ...c, ...patch };
+            guardar("clientes", [{ id: n.id, segmento: n.segmento, datos: n }], accion);
+            return n;
+          }),
+        ),
       addCampana: (c) => {
         setCampanas((prev) => [c, ...prev]);
         guardar("campanas", [filaCampana(c)], "crear");

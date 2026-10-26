@@ -14,6 +14,8 @@ import { Route as GeneradorRouteImport } from './routes/generador'
 import { Route as CampanasIndexRouteImport } from './routes/campanas.index'
 import { Route as CampanasIdRouteImport } from './routes/campanas.$id'
 import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
+import { Route as ClientesIndexRouteImport } from './routes/clientes.index'
+import { Route as ClientesIdRouteImport } from './routes/clientes.$id'
 import { Route as RevisionIndexRouteImport } from './routes/revision.index'
 import { Route as RevisionIdRouteImport } from './routes/revision.$id'
 
@@ -42,6 +44,16 @@ const CampanasNuevaRoute = CampanasNuevaRouteImport.update({
   path: '/campanas/nueva',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClientesIndexRoute = ClientesIndexRouteImport.update({
+  id: '/clientes/',
+  path: '/clientes/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientesIdRoute = ClientesIdRouteImport.update({
+  id: '/clientes/$id',
+  path: '/clientes/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RevisionIndexRoute = RevisionIndexRouteImport.update({
   id: '/revision/',
   path: '/revision/',
@@ -58,8 +70,10 @@ export interface FileRoutesByFullPath {
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/clientes/$id': typeof ClientesIdRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
+  '/clientes/': typeof ClientesIndexRoute
   '/revision/': typeof RevisionIndexRoute
 }
 export interface FileRoutesByTo {
@@ -67,8 +81,10 @@ export interface FileRoutesByTo {
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/clientes/$id': typeof ClientesIdRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas': typeof CampanasIndexRoute
+  '/clientes': typeof ClientesIndexRoute
   '/revision': typeof RevisionIndexRoute
 }
 export interface FileRoutesById {
@@ -77,8 +93,10 @@ export interface FileRoutesById {
   '/generador': typeof GeneradorRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
+  '/clientes/$id': typeof ClientesIdRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
+  '/clientes/': typeof ClientesIndexRoute
   '/revision/': typeof RevisionIndexRoute
 }
 export interface FileRouteTypes {
@@ -88,8 +106,10 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/clientes/$id'
     | '/revision/$id'
     | '/campanas/'
+    | '/clientes/'
     | '/revision/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -97,8 +117,10 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/clientes/$id'
     | '/revision/$id'
     | '/campanas'
+    | '/clientes'
     | '/revision'
   id:
     | '__root__'
@@ -106,8 +128,10 @@ export interface FileRouteTypes {
     | '/generador'
     | '/campanas/$id'
     | '/campanas/nueva'
+    | '/clientes/$id'
     | '/revision/$id'
     | '/campanas/'
+    | '/clientes/'
     | '/revision/'
   fileRoutesById: FileRoutesById
 }
@@ -116,8 +140,10 @@ export interface RootRouteChildren {
   GeneradorRoute: typeof GeneradorRoute
   CampanasIdRoute: typeof CampanasIdRoute
   CampanasNuevaRoute: typeof CampanasNuevaRoute
+  ClientesIdRoute: typeof ClientesIdRoute
   RevisionIdRoute: typeof RevisionIdRoute
   CampanasIndexRoute: typeof CampanasIndexRoute
+  ClientesIndexRoute: typeof ClientesIndexRoute
   RevisionIndexRoute: typeof RevisionIndexRoute
 }
 
@@ -158,6 +184,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CampanasNuevaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clientes/': {
+      id: '/clientes/'
+      path: '/clientes'
+      fullPath: '/clientes/'
+      preLoaderRoute: typeof ClientesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clientes/$id': {
+      id: '/clientes/$id'
+      path: '/clientes/$id'
+      fullPath: '/clientes/$id'
+      preLoaderRoute: typeof ClientesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/revision/': {
       id: '/revision/'
       path: '/revision'
@@ -180,8 +220,10 @@ const rootRouteChildren: RootRouteChildren = {
   GeneradorRoute: GeneradorRoute,
   CampanasIdRoute: CampanasIdRoute,
   CampanasNuevaRoute: CampanasNuevaRoute,
+  ClientesIdRoute: ClientesIdRoute,
   RevisionIdRoute: RevisionIdRoute,
   CampanasIndexRoute: CampanasIndexRoute,
+  ClientesIndexRoute: ClientesIndexRoute,
   RevisionIndexRoute: RevisionIndexRoute,
 }
 export const routeTree = rootRouteImport
