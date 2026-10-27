@@ -24,6 +24,8 @@ export const Route = createFileRoute("/campanas/nueva")({
   head: () => ({
     meta: [
       { title: "Nueva campaña — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Constructor de campañas con validación de consentimiento por canal." },
       { property: "og:title", content: "Nueva campaña — MarketingHub AI" },
       { property: "og:description", content: "Define objetivo, segmento, canal, secuencia y base jurídica." },

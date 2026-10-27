@@ -35,7 +35,7 @@ function ClienteDetalle() {
     );
   }
 
-  const suyos = mensajes.filter((m) => (m as { clienteId?: string }).clienteId === c.id);
+  const suyos = mensajes.filter((m) => m.clienteId === c.id);
 
   const cambiar = (canal: Canal, estado: EstadoConsentimiento) => {
     const hoy = new Date().toISOString().slice(0, 10);

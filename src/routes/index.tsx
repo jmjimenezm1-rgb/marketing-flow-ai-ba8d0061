@@ -8,6 +8,8 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "MarketingHub AI — Campañas, IA y revisión con cumplimiento" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content:

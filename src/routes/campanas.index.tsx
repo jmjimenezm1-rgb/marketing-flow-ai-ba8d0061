@@ -19,6 +19,8 @@ export const Route = createFileRoute("/campanas/")({
   head: () => ({
     meta: [
       { title: "Campañas — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content: "Gestiona campañas comerciales por email y WhatsApp con reglas de consentimiento y validación legal.",
