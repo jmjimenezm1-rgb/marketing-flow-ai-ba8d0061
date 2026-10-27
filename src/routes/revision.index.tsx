@@ -25,6 +25,8 @@ export const Route = createFileRoute("/revision/")({
   head: () => ({
     meta: [
       { title: "Revisión de mensajes — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content: "Bandeja de revisión humana: aprueba, edita o bloquea cada mensaje antes de enviarlo al cliente.",

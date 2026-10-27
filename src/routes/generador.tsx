@@ -29,6 +29,8 @@ export const Route = createFileRoute("/generador")({
   head: () => ({
     meta: [
       { title: "Generador de mensajes con IA — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       {
         name: "description",
         content: "Genera mensajes de email y WhatsApp personalizados por cliente, con reglas de IA responsable.",

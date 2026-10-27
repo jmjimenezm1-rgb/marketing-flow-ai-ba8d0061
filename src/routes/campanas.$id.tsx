@@ -13,6 +13,8 @@ export const Route = createFileRoute("/campanas/$id")({
   head: () => ({
     meta: [
       { title: "Detalle de campaña — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Ficha de campaña: destinatarios, secuencia evolutiva y cumplimiento." },
       { property: "og:title", content: "Detalle de campaña — MarketingHub AI" },
       { property: "og:description", content: "Destinatarios, secuencia de refuerzos y estado de validación legal." },

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GeneradorRouteImport } from './routes/generador'
+import { Route as ProductosRouteImport } from './routes/productos'
 import { Route as CampanasIndexRouteImport } from './routes/campanas.index'
 import { Route as CampanasIdRouteImport } from './routes/campanas.$id'
 import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
@@ -27,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
 const GeneradorRoute = GeneradorRouteImport.update({
   id: '/generador',
   path: '/generador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductosRoute = ProductosRouteImport.update({
+  id: '/productos',
+  path: '/productos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CampanasIndexRoute = CampanasIndexRouteImport.update({
@@ -68,6 +74,7 @@ const RevisionIdRoute = RevisionIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/generador': typeof GeneradorRoute
+  '/productos': typeof ProductosRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
@@ -79,6 +86,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/generador': typeof GeneradorRoute
+  '/productos': typeof ProductosRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
@@ -91,6 +99,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/generador': typeof GeneradorRoute
+  '/productos': typeof ProductosRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
@@ -104,6 +113,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/generador'
+    | '/productos'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
@@ -115,6 +125,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/generador'
+    | '/productos'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
@@ -126,6 +137,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/generador'
+    | '/productos'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
@@ -138,6 +150,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   GeneradorRoute: typeof GeneradorRoute
+  ProductosRoute: typeof ProductosRoute
   CampanasIdRoute: typeof CampanasIdRoute
   CampanasNuevaRoute: typeof CampanasNuevaRoute
   ClientesIdRoute: typeof ClientesIdRoute
@@ -161,6 +174,13 @@ declare module '@tanstack/react-router' {
       path: '/generador'
       fullPath: '/generador'
       preLoaderRoute: typeof GeneradorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/productos': {
+      id: '/productos'
+      path: '/productos'
+      fullPath: '/productos'
+      preLoaderRoute: typeof ProductosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/campanas/': {
@@ -218,6 +238,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   GeneradorRoute: GeneradorRoute,
+  ProductosRoute: ProductosRoute,
   CampanasIdRoute: CampanasIdRoute,
   CampanasNuevaRoute: CampanasNuevaRoute,
   ClientesIdRoute: ClientesIdRoute,

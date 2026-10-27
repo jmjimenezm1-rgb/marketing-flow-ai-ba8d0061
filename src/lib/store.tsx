@@ -21,6 +21,7 @@ type Store = {
   fuente: Fuente;
   usuarioActual: { nombre: string; rol: string };
   updateCliente: (id: string, patch: Partial<Cliente>, accion: string) => void;
+  saveProducto: (producto: Producto) => Promise<void>;
   addCampana: (c: Campana) => void;
   updateCampana: (id: string, patch: Partial<Campana>) => void;
   addMensajes: (m: MensajeGenerado[]) => void;
@@ -72,7 +73,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           setMensajes(me ?? []);
           remoto.current = true;
           setFuente("supabase");
-        } else setFuente("local");
+        } else {
+          const saved = localStorage.getItem("marketinghub-productos");
+          if (saved) {
+            try {
+              const parsed: unknown = JSON.parse(saved);
+              if (Array.isArray(parsed) && parsed.every((p) => p && typeof p.id === "string" && typeof p.nombre === "string" && Array.isArray(p.beneficios) && Array.isArray(p.objeciones))) setProductos(parsed);
+            } catch { /* Keep demo products when browser storage is invalid. */ }
+          }
+          setFuente("local");
+        }
       } catch {
         if (vivo) setFuente("local");
       }
@@ -105,6 +115,18 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       mensajes,
       fuente,
       usuarioActual,
+      saveProducto: async (producto) => {
+        if (remoto.current) {
+          const { error } = await supabaseExterno.from("productos").upsert({ id: producto.id, nombre: producto.nombre, datos: producto });
+          if (error) throw error;
+        } else {
+          const next = productos.some((p) => p.id === producto.id)
+            ? productos.map((p) => p.id === producto.id ? producto : p)
+            : [producto, ...productos];
+          localStorage.setItem("marketinghub-productos", JSON.stringify(next));
+        }
+        setProductos((prev) => prev.some((p) => p.id === producto.id) ? prev.map((p) => p.id === producto.id ? producto : p) : [producto, ...prev]);
+      },
       updateCliente: (id, patch, accion) =>
         setClientes((prev) =>
           prev.map((c) => {

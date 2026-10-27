@@ -16,6 +16,8 @@ export const Route = createFileRoute("/revision/$id")({
   head: () => ({
     meta: [
       { title: "Detalle del mensaje — MarketingHub AI" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
       { name: "description", content: "Detalle y edición del mensaje antes del envío, con comparativa de versiones." },
       { property: "og:title", content: "Detalle del mensaje — MarketingHub AI" },
       { property: "og:description", content: "Compara versiones, revisa riesgos y aprueba antes de enviar." },
