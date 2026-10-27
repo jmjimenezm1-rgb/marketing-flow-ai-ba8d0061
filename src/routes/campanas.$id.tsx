@@ -115,7 +115,7 @@ function DetalleCampana() {
       )}
 
       <Tabs defaultValue="resumen">
-        <TabsList>
+        <TabsList className="flex h-auto w-full flex-wrap gap-1 rounded-lg sm:inline-flex sm:h-9 sm:w-auto sm:gap-0">
           <TabsTrigger value="resumen">Resumen</TabsTrigger>
           <TabsTrigger value="destinatarios">Destinatarios ({destinatarios.length})</TabsTrigger>
           <TabsTrigger value="secuencia">Secuencia ({campana.secuencia.length})</TabsTrigger>
