@@ -17,6 +17,7 @@ import {
 import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, activo: true },
@@ -24,7 +25,7 @@ const nav = [
   { to: "/generador", label: "Generador IA", icon: Sparkles, activo: true },
   { to: "/revision", label: "Revisión de mensajes", icon: ClipboardCheck, activo: true },
   { to: "/clientes", label: "Clientes y leads", icon: Users, activo: true },
-  { to: "/", label: "Productos", icon: Package, activo: false },
+  { to: "/productos", label: "Productos", icon: Package, activo: true },
   { to: "/", label: "Envíos", icon: Send, activo: false },
   { to: "/", label: "Bandejas", icon: Inbox, activo: false },
   { to: "/", label: "Cumplimiento", icon: ShieldCheck, activo: false },
@@ -104,14 +105,16 @@ export function AppShell({
 
       <div className="flex min-w-0 flex-1 flex-col">
         <header className="sticky top-0 z-20 flex flex-wrap items-center gap-3 border-b bg-card/85 px-4 py-3 backdrop-blur md:px-8">
-          <button
+          <Button
             type="button"
+            variant="outline"
+            size="icon"
             aria-label="Volver"
             onClick={() => (window.history.length > 1 ? router.history.back() : router.navigate({ to: "/" }))}
             className="grid size-9 shrink-0 place-items-center rounded-md border bg-background text-foreground transition-colors hover:bg-muted"
           >
             <ArrowLeft className="size-4" />
-          </button>
+          </Button>
           <div className="min-w-0 flex-1">
             <h1 className="truncate text-lg font-semibold md:text-xl">{title}</h1>
             {subtitle ? <p className="truncate text-sm text-muted-foreground">{subtitle}</p> : null}
