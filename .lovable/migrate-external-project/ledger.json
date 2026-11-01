@@ -1,0 +1,15 @@
+{
+  "source": "github:jmjimenezm1-rgb/marketing-catalyst",
+  "mode": "parallel mock-only integration",
+  "capabilities": [
+    {"capability":"code and screens","source":"both projects","outcome":"preserve in parallel","status":"inventory in progress","next_action":"document exact routes and integration plan"},
+    {"capability":"schema","source":"existing projects","outcome":"no changes permitted","status":"excluded by explicit instruction","next_action":"none in this phase"},
+    {"capability":"records","source":"mock data","outcome":"preserve separate seeds with session mutations","status":"pending","next_action":"design temporary adapters"},
+    {"capability":"auth identities and authorization","source":"existing projects","outcome":"no authentication added; preserve legal guards","status":"pending inventory","next_action":"inspect existing source guards"},
+    {"capability":"uploaded file bytes","source":"source repository","outcome":"preserve required committed assets","status":"pending inventory","next_action":"inspect references"},
+    {"capability":"external providers and secrets","source":"source repository","outcome":"mock only; no new secrets or connections","status":"excluded by explicit instruction","next_action":"preserve mock provider interfaces"},
+    {"capability":"public endpoints callbacks webhooks schedules","source":"source repository","outcome":"inventory only; no real provider integration","status":"pending inventory","next_action":"inspect source call sites"},
+    {"capability":"cutover","source":"existing routes","outcome":"preserve original URLs and parallel screens","status":"pending plan","next_action":"resolve namespace without dropping pages"},
+    {"capability":"verification","source":"combined application","outcome":"browser and concrete legal-rule tests","status":"pending implementation","next_action":"test both areas and linked session workflows at desktop tablet mobile"}
+  ]
+}
