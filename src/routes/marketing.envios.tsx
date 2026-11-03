@@ -38,7 +38,7 @@ import { useStore } from "@/marketing/catalyst/store";
 import { validarEnvio } from "@/marketing/catalyst/services/compliance";
 import {
   campanas,
-  getCliente,
+  
   getMensaje,
   nombreCampana,
   nombreCliente,
@@ -77,7 +77,8 @@ const TIPOS: Record<Envio["tipo"], string> = {
 };
 
 function EnviosPage() {
-  const { envios, actualizarEnvio } = useStore();
+  const { envios, actualizarEnvio, clientes: clientesSesion, snapshot } = useStore();
+  const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
   const [canal, setCanal] = useState("todos");
   const [estado, setEstado] = useState("todos");
   const [tipo, setTipo] = useState("todos");
@@ -104,7 +105,7 @@ function EnviosPage() {
   );
 
   const seleccionados = envios.filter((e) => seleccion.includes(e.id));
-  const validaciones = seleccionados.map((e) => ({ envio: e, resultado: validarEnvio(e, enviadosHoy) }));
+  const validaciones = seleccionados.map((e) => ({ envio: e, resultado: validarEnvio(e, enviadosHoy, snapshot) }));
   const aptos = validaciones.filter((v) => v.resultado.permitido);
   const bloqueados = validaciones.filter((v) => !v.resultado.permitido);
 
@@ -112,7 +113,7 @@ function EnviosPage() {
     setSeleccion((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
 
   const enviar = (envio: Envio) => {
-    const { permitido, chequeos } = validarEnvio(envio, enviadosHoy);
+    const { permitido, chequeos } = validarEnvio(envio, enviadosHoy, snapshot);
     if (!permitido) {
       const fallo = chequeos.find((c) => !c.ok && c.bloqueante);
       actualizarEnvio(
@@ -411,9 +412,10 @@ function EnviosPage() {
 }
 
 function DetalleEnvio({ envio }: { envio: Envio }) {
-  const cliente = getCliente(envio.clienteId);
+  const { snapshot } = useStore();
+  const cliente = snapshot.clientes.find((c) => c.id === envio.clienteId);
   const mensaje = getMensaje(envio.mensajeId);
-  const { chequeos, permitido } = validarEnvio(envio);
+  const { chequeos, permitido } = validarEnvio(envio, 0, snapshot);
 
   return (
     <>
