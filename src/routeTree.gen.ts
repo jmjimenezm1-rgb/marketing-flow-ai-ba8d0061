@@ -10,19 +10,66 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuditoriaRouteImport } from './routes/auditoria'
+import { Route as BandejaEntradaRouteImport } from './routes/bandeja-entrada'
+import { Route as BandejaSalidaRouteImport } from './routes/bandeja-salida'
+import { Route as ConsentimientosRouteImport } from './routes/consentimientos'
+import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as GeneradorRouteImport } from './routes/generador'
 import { Route as ProductosRouteImport } from './routes/productos'
+import { Route as SecuenciasRouteImport } from './routes/secuencias'
 import { Route as CampanasIndexRouteImport } from './routes/campanas.index'
 import { Route as CampanasIdRouteImport } from './routes/campanas.$id'
 import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
 import { Route as ClientesIndexRouteImport } from './routes/clientes.index'
 import { Route as ClientesIdRouteImport } from './routes/clientes.$id'
+import { Route as MarketingIndexRouteImport } from './routes/marketing.index'
+import { Route as MarketingAuditoriaRouteImport } from './routes/marketing.auditoria'
+import { Route as MarketingBandejaEntradaRouteImport } from './routes/marketing.bandeja-entrada'
+import { Route as MarketingBandejaSalidaRouteImport } from './routes/marketing.bandeja-salida'
+import { Route as MarketingCampanasRouteImport } from './routes/marketing.campanas'
+import { Route as MarketingClientesRouteImport } from './routes/marketing.clientes'
+import { Route as MarketingConsentimientosRouteImport } from './routes/marketing.consentimientos'
+import { Route as MarketingEnviosRouteImport } from './routes/marketing.envios'
+import { Route as MarketingGeneradorRouteImport } from './routes/marketing.generador'
+import { Route as MarketingProductosRouteImport } from './routes/marketing.productos'
+import { Route as MarketingRevisionRouteImport } from './routes/marketing.revision'
+import { Route as MarketingSecuenciasRouteImport } from './routes/marketing.secuencias'
 import { Route as RevisionIndexRouteImport } from './routes/revision.index'
 import { Route as RevisionIdRouteImport } from './routes/revision.$id'
+import { Route as MarketingCatalystIndexRouteImport } from './routes/marketing.catalyst.index'
+import { Route as MarketingCatalystCampanasRouteImport } from './routes/marketing.catalyst.campanas'
+import { Route as MarketingCatalystClientesRouteImport } from './routes/marketing.catalyst.clientes'
+import { Route as MarketingCatalystProductosRouteImport } from './routes/marketing.catalyst.productos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuditoriaRoute = AuditoriaRouteImport.update({
+  id: '/auditoria',
+  path: '/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BandejaEntradaRoute = BandejaEntradaRouteImport.update({
+  id: '/bandeja-entrada',
+  path: '/bandeja-entrada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BandejaSalidaRoute = BandejaSalidaRouteImport.update({
+  id: '/bandeja-salida',
+  path: '/bandeja-salida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsentimientosRoute = ConsentimientosRouteImport.update({
+  id: '/consentimientos',
+  path: '/consentimientos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnviosRoute = EnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GeneradorRoute = GeneradorRouteImport.update({
@@ -33,6 +80,11 @@ const GeneradorRoute = GeneradorRouteImport.update({
 const ProductosRoute = ProductosRouteImport.update({
   id: '/productos',
   path: '/productos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecuenciasRoute = SecuenciasRouteImport.update({
+  id: '/secuencias',
+  path: '/secuencias',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CampanasIndexRoute = CampanasIndexRouteImport.update({
@@ -60,6 +112,67 @@ const ClientesIdRoute = ClientesIdRouteImport.update({
   path: '/clientes/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingIndexRoute = MarketingIndexRouteImport.update({
+  id: '/marketing/',
+  path: '/marketing/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingAuditoriaRoute = MarketingAuditoriaRouteImport.update({
+  id: '/marketing/auditoria',
+  path: '/marketing/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingBandejaEntradaRoute = MarketingBandejaEntradaRouteImport.update({
+  id: '/marketing/bandeja-entrada',
+  path: '/marketing/bandeja-entrada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingBandejaSalidaRoute = MarketingBandejaSalidaRouteImport.update({
+  id: '/marketing/bandeja-salida',
+  path: '/marketing/bandeja-salida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingCampanasRoute = MarketingCampanasRouteImport.update({
+  id: '/marketing/campanas',
+  path: '/marketing/campanas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingClientesRoute = MarketingClientesRouteImport.update({
+  id: '/marketing/clientes',
+  path: '/marketing/clientes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingConsentimientosRoute =
+  MarketingConsentimientosRouteImport.update({
+    id: '/marketing/consentimientos',
+    path: '/marketing/consentimientos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingEnviosRoute = MarketingEnviosRouteImport.update({
+  id: '/marketing/envios',
+  path: '/marketing/envios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingGeneradorRoute = MarketingGeneradorRouteImport.update({
+  id: '/marketing/generador',
+  path: '/marketing/generador',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingProductosRoute = MarketingProductosRouteImport.update({
+  id: '/marketing/productos',
+  path: '/marketing/productos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingRevisionRoute = MarketingRevisionRouteImport.update({
+  id: '/marketing/revision',
+  path: '/marketing/revision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingSecuenciasRoute = MarketingSecuenciasRouteImport.update({
+  id: '/marketing/secuencias',
+  path: '/marketing/secuencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RevisionIndexRoute = RevisionIndexRouteImport.update({
   id: '/revision/',
   path: '/revision/',
@@ -70,94 +183,271 @@ const RevisionIdRoute = RevisionIdRouteImport.update({
   path: '/revision/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingCatalystIndexRoute = MarketingCatalystIndexRouteImport.update({
+  id: '/marketing/catalyst/',
+  path: '/marketing/catalyst/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingCatalystCampanasRoute =
+  MarketingCatalystCampanasRouteImport.update({
+    id: '/marketing/catalyst/campanas',
+    path: '/marketing/catalyst/campanas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingCatalystClientesRoute =
+  MarketingCatalystClientesRouteImport.update({
+    id: '/marketing/catalyst/clientes',
+    path: '/marketing/catalyst/clientes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingCatalystProductosRoute =
+  MarketingCatalystProductosRouteImport.update({
+    id: '/marketing/catalyst/productos',
+    path: '/marketing/catalyst/productos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/bandeja-entrada': typeof BandejaEntradaRoute
+  '/bandeja-salida': typeof BandejaSalidaRoute
+  '/consentimientos': typeof ConsentimientosRoute
+  '/envios': typeof EnviosRoute
   '/generador': typeof GeneradorRoute
   '/productos': typeof ProductosRoute
+  '/secuencias': typeof SecuenciasRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/campanas': typeof MarketingCampanasRoute
+  '/marketing/clientes': typeof MarketingClientesRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/generador': typeof MarketingGeneradorRoute
+  '/marketing/productos': typeof MarketingProductosRoute
+  '/marketing/revision': typeof MarketingRevisionRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/clientes/': typeof ClientesIndexRoute
+  '/marketing/': typeof MarketingIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/bandeja-entrada': typeof BandejaEntradaRoute
+  '/bandeja-salida': typeof BandejaSalidaRoute
+  '/consentimientos': typeof ConsentimientosRoute
+  '/envios': typeof EnviosRoute
   '/generador': typeof GeneradorRoute
   '/productos': typeof ProductosRoute
+  '/secuencias': typeof SecuenciasRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/campanas': typeof MarketingCampanasRoute
+  '/marketing/clientes': typeof MarketingClientesRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/generador': typeof MarketingGeneradorRoute
+  '/marketing/productos': typeof MarketingProductosRoute
+  '/marketing/revision': typeof MarketingRevisionRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas': typeof CampanasIndexRoute
   '/clientes': typeof ClientesIndexRoute
+  '/marketing': typeof MarketingIndexRoute
   '/revision': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auditoria': typeof AuditoriaRoute
+  '/bandeja-entrada': typeof BandejaEntradaRoute
+  '/bandeja-salida': typeof BandejaSalidaRoute
+  '/consentimientos': typeof ConsentimientosRoute
+  '/envios': typeof EnviosRoute
   '/generador': typeof GeneradorRoute
   '/productos': typeof ProductosRoute
+  '/secuencias': typeof SecuenciasRoute
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/campanas': typeof MarketingCampanasRoute
+  '/marketing/clientes': typeof MarketingClientesRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/generador': typeof MarketingGeneradorRoute
+  '/marketing/productos': typeof MarketingProductosRoute
+  '/marketing/revision': typeof MarketingRevisionRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/clientes/': typeof ClientesIndexRoute
+  '/marketing/': typeof MarketingIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auditoria'
+    | '/bandeja-entrada'
+    | '/bandeja-salida'
+    | '/consentimientos'
+    | '/envios'
     | '/generador'
     | '/productos'
+    | '/secuencias'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/campanas'
+    | '/marketing/clientes'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/generador'
+    | '/marketing/productos'
+    | '/marketing/revision'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas/'
     | '/clientes/'
+    | '/marketing/'
     | '/revision/'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auditoria'
+    | '/bandeja-entrada'
+    | '/bandeja-salida'
+    | '/consentimientos'
+    | '/envios'
     | '/generador'
     | '/productos'
+    | '/secuencias'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/campanas'
+    | '/marketing/clientes'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/generador'
+    | '/marketing/productos'
+    | '/marketing/revision'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas'
     | '/clientes'
+    | '/marketing'
     | '/revision'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst'
   id:
     | '__root__'
     | '/'
+    | '/auditoria'
+    | '/bandeja-entrada'
+    | '/bandeja-salida'
+    | '/consentimientos'
+    | '/envios'
     | '/generador'
     | '/productos'
+    | '/secuencias'
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/campanas'
+    | '/marketing/clientes'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/generador'
+    | '/marketing/productos'
+    | '/marketing/revision'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas/'
     | '/clientes/'
+    | '/marketing/'
     | '/revision/'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuditoriaRoute: typeof AuditoriaRoute
+  BandejaEntradaRoute: typeof BandejaEntradaRoute
+  BandejaSalidaRoute: typeof BandejaSalidaRoute
+  ConsentimientosRoute: typeof ConsentimientosRoute
+  EnviosRoute: typeof EnviosRoute
   GeneradorRoute: typeof GeneradorRoute
   ProductosRoute: typeof ProductosRoute
+  SecuenciasRoute: typeof SecuenciasRoute
   CampanasIdRoute: typeof CampanasIdRoute
   CampanasNuevaRoute: typeof CampanasNuevaRoute
   ClientesIdRoute: typeof ClientesIdRoute
+  MarketingAuditoriaRoute: typeof MarketingAuditoriaRoute
+  MarketingBandejaEntradaRoute: typeof MarketingBandejaEntradaRoute
+  MarketingBandejaSalidaRoute: typeof MarketingBandejaSalidaRoute
+  MarketingCampanasRoute: typeof MarketingCampanasRoute
+  MarketingClientesRoute: typeof MarketingClientesRoute
+  MarketingConsentimientosRoute: typeof MarketingConsentimientosRoute
+  MarketingEnviosRoute: typeof MarketingEnviosRoute
+  MarketingGeneradorRoute: typeof MarketingGeneradorRoute
+  MarketingProductosRoute: typeof MarketingProductosRoute
+  MarketingRevisionRoute: typeof MarketingRevisionRoute
+  MarketingSecuenciasRoute: typeof MarketingSecuenciasRoute
   RevisionIdRoute: typeof RevisionIdRoute
   CampanasIndexRoute: typeof CampanasIndexRoute
   ClientesIndexRoute: typeof ClientesIndexRoute
+  MarketingIndexRoute: typeof MarketingIndexRoute
   RevisionIndexRoute: typeof RevisionIndexRoute
+  MarketingCatalystCampanasRoute: typeof MarketingCatalystCampanasRoute
+  MarketingCatalystClientesRoute: typeof MarketingCatalystClientesRoute
+  MarketingCatalystProductosRoute: typeof MarketingCatalystProductosRoute
+  MarketingCatalystIndexRoute: typeof MarketingCatalystIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -167,6 +457,41 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auditoria': {
+      id: '/auditoria'
+      path: '/auditoria'
+      fullPath: '/auditoria'
+      preLoaderRoute: typeof AuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bandeja-entrada': {
+      id: '/bandeja-entrada'
+      path: '/bandeja-entrada'
+      fullPath: '/bandeja-entrada'
+      preLoaderRoute: typeof BandejaEntradaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bandeja-salida': {
+      id: '/bandeja-salida'
+      path: '/bandeja-salida'
+      fullPath: '/bandeja-salida'
+      preLoaderRoute: typeof BandejaSalidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consentimientos': {
+      id: '/consentimientos'
+      path: '/consentimientos'
+      fullPath: '/consentimientos'
+      preLoaderRoute: typeof ConsentimientosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envios': {
+      id: '/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof EnviosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/generador': {
@@ -181,6 +506,13 @@ declare module '@tanstack/react-router' {
       path: '/productos'
       fullPath: '/productos'
       preLoaderRoute: typeof ProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/secuencias': {
+      id: '/secuencias'
+      path: '/secuencias'
+      fullPath: '/secuencias'
+      preLoaderRoute: typeof SecuenciasRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/campanas/': {
@@ -218,6 +550,90 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing/': {
+      id: '/marketing/'
+      path: '/marketing'
+      fullPath: '/marketing/'
+      preLoaderRoute: typeof MarketingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/auditoria': {
+      id: '/marketing/auditoria'
+      path: '/marketing/auditoria'
+      fullPath: '/marketing/auditoria'
+      preLoaderRoute: typeof MarketingAuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/bandeja-entrada': {
+      id: '/marketing/bandeja-entrada'
+      path: '/marketing/bandeja-entrada'
+      fullPath: '/marketing/bandeja-entrada'
+      preLoaderRoute: typeof MarketingBandejaEntradaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/bandeja-salida': {
+      id: '/marketing/bandeja-salida'
+      path: '/marketing/bandeja-salida'
+      fullPath: '/marketing/bandeja-salida'
+      preLoaderRoute: typeof MarketingBandejaSalidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/campanas': {
+      id: '/marketing/campanas'
+      path: '/marketing/campanas'
+      fullPath: '/marketing/campanas'
+      preLoaderRoute: typeof MarketingCampanasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/clientes': {
+      id: '/marketing/clientes'
+      path: '/marketing/clientes'
+      fullPath: '/marketing/clientes'
+      preLoaderRoute: typeof MarketingClientesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/consentimientos': {
+      id: '/marketing/consentimientos'
+      path: '/marketing/consentimientos'
+      fullPath: '/marketing/consentimientos'
+      preLoaderRoute: typeof MarketingConsentimientosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/envios': {
+      id: '/marketing/envios'
+      path: '/marketing/envios'
+      fullPath: '/marketing/envios'
+      preLoaderRoute: typeof MarketingEnviosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/generador': {
+      id: '/marketing/generador'
+      path: '/marketing/generador'
+      fullPath: '/marketing/generador'
+      preLoaderRoute: typeof MarketingGeneradorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/productos': {
+      id: '/marketing/productos'
+      path: '/marketing/productos'
+      fullPath: '/marketing/productos'
+      preLoaderRoute: typeof MarketingProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/revision': {
+      id: '/marketing/revision'
+      path: '/marketing/revision'
+      fullPath: '/marketing/revision'
+      preLoaderRoute: typeof MarketingRevisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/secuencias': {
+      id: '/marketing/secuencias'
+      path: '/marketing/secuencias'
+      fullPath: '/marketing/secuencias'
+      preLoaderRoute: typeof MarketingSecuenciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/revision/': {
       id: '/revision/'
       path: '/revision'
@@ -232,20 +648,70 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevisionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing/catalyst/': {
+      id: '/marketing/catalyst/'
+      path: '/marketing/catalyst'
+      fullPath: '/marketing/catalyst/'
+      preLoaderRoute: typeof MarketingCatalystIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/campanas': {
+      id: '/marketing/catalyst/campanas'
+      path: '/marketing/catalyst/campanas'
+      fullPath: '/marketing/catalyst/campanas'
+      preLoaderRoute: typeof MarketingCatalystCampanasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/clientes': {
+      id: '/marketing/catalyst/clientes'
+      path: '/marketing/catalyst/clientes'
+      fullPath: '/marketing/catalyst/clientes'
+      preLoaderRoute: typeof MarketingCatalystClientesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/productos': {
+      id: '/marketing/catalyst/productos'
+      path: '/marketing/catalyst/productos'
+      fullPath: '/marketing/catalyst/productos'
+      preLoaderRoute: typeof MarketingCatalystProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuditoriaRoute: AuditoriaRoute,
+  BandejaEntradaRoute: BandejaEntradaRoute,
+  BandejaSalidaRoute: BandejaSalidaRoute,
+  ConsentimientosRoute: ConsentimientosRoute,
+  EnviosRoute: EnviosRoute,
   GeneradorRoute: GeneradorRoute,
   ProductosRoute: ProductosRoute,
+  SecuenciasRoute: SecuenciasRoute,
   CampanasIdRoute: CampanasIdRoute,
   CampanasNuevaRoute: CampanasNuevaRoute,
   ClientesIdRoute: ClientesIdRoute,
+  MarketingAuditoriaRoute: MarketingAuditoriaRoute,
+  MarketingBandejaEntradaRoute: MarketingBandejaEntradaRoute,
+  MarketingBandejaSalidaRoute: MarketingBandejaSalidaRoute,
+  MarketingCampanasRoute: MarketingCampanasRoute,
+  MarketingClientesRoute: MarketingClientesRoute,
+  MarketingConsentimientosRoute: MarketingConsentimientosRoute,
+  MarketingEnviosRoute: MarketingEnviosRoute,
+  MarketingGeneradorRoute: MarketingGeneradorRoute,
+  MarketingProductosRoute: MarketingProductosRoute,
+  MarketingRevisionRoute: MarketingRevisionRoute,
+  MarketingSecuenciasRoute: MarketingSecuenciasRoute,
   RevisionIdRoute: RevisionIdRoute,
   CampanasIndexRoute: CampanasIndexRoute,
   ClientesIndexRoute: ClientesIndexRoute,
+  MarketingIndexRoute: MarketingIndexRoute,
   RevisionIndexRoute: RevisionIndexRoute,
+  MarketingCatalystCampanasRoute: MarketingCatalystCampanasRoute,
+  MarketingCatalystClientesRoute: MarketingCatalystClientesRoute,
+  MarketingCatalystProductosRoute: MarketingCatalystProductosRoute,
+  MarketingCatalystIndexRoute: MarketingCatalystIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

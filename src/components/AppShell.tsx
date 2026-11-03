@@ -13,25 +13,59 @@ import {
   BarChart3,
   Settings,
   Search,
+  Menu,
 } from "lucide-react";
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useStore } from "@/lib/store";
 import { Button } from "@/components/ui/button";
 
-const nav = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, activo: true },
-  { to: "/campanas", label: "Campañas", icon: Megaphone, activo: true },
-  { to: "/generador", label: "Generador IA", icon: Sparkles, activo: true },
-  { to: "/revision", label: "Revisión de mensajes", icon: ClipboardCheck, activo: true },
-  { to: "/clientes", label: "Clientes y leads", icon: Users, activo: true },
-  { to: "/productos", label: "Productos", icon: Package, activo: true },
-  { to: "/", label: "Envíos", icon: Send, activo: false },
-  { to: "/", label: "Bandejas", icon: Inbox, activo: false },
-  { to: "/", label: "Cumplimiento", icon: ShieldCheck, activo: false },
-  { to: "/", label: "Analítica", icon: BarChart3, activo: false },
-  { to: "/", label: "Configuración", icon: Settings, activo: false },
-];
+const groups = [
+  { title: "Marketing Flow", items: [
+    { to: "/", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/campanas", label: "Campañas", icon: Megaphone },
+    { to: "/generador", label: "Generador IA", icon: Sparkles },
+    { to: "/revision", label: "Revisión de mensajes", icon: ClipboardCheck },
+    { to: "/clientes", label: "Clientes y leads", icon: Users },
+    { to: "/productos", label: "Productos", icon: Package },
+  ] },
+  { title: "Marketing Catalyst", items: [
+    { to: "/marketing/catalyst", label: "Operación", icon: BarChart3 },
+    { to: "/marketing/catalyst/clientes", label: "Clientes", icon: Users },
+    { to: "/marketing/catalyst/productos", label: "Productos", icon: Package },
+    { to: "/marketing/catalyst/campanas", label: "Campañas", icon: Megaphone },
+    { to: "/marketing/secuencias", label: "Secuencias", icon: Settings },
+    { to: "/marketing/envios", label: "Envíos", icon: Send },
+    { to: "/marketing/bandeja-entrada", label: "Bandeja de entrada", icon: Inbox },
+    { to: "/marketing/bandeja-salida", label: "Bandeja de salida", icon: Inbox },
+    { to: "/marketing/consentimientos", label: "Consentimientos", icon: ShieldCheck },
+    { to: "/marketing/auditoria", label: "Auditoría", icon: ClipboardCheck },
+  ] },
+] as const;
+
+function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
+  return (
+    <>
+      {groups.map((g) => (
+        <div key={g.title} className="mb-4">
+          <p className="px-3 pb-1 text-[11px] font-semibold uppercase tracking-wide text-sidebar-foreground/50">{g.title}</p>
+          {g.items.map((item) => {
+            const active = item.to === "/" ? pathname === "/" : item.to === "/marketing/catalyst" ? pathname === "/marketing/catalyst" || pathname === "/marketing/catalyst/" : pathname.startsWith(item.to);
+            const Icon = item.icon;
+            return (
+              <Link key={item.to} to={item.to} onClick={onNavigate}
+                className={cn("flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
+                  active ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground" : "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground")}>
+                <Icon className="size-4" />{item.label}
+              </Link>
+            );
+          })}
+        </div>
+      ))}
+    </>
+  );
+}
 
 export function AppShell({
   title,
@@ -46,6 +80,7 @@ export function AppShell({
 }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const router = useRouter();
+  const [menu, setMenu] = useState(false);
   const { usuarioActual, fuente } = useStore();
 
   return (
@@ -61,38 +96,7 @@ export function AppShell({
           </div>
         </div>
         <nav className="flex-1 space-y-0.5 overflow-y-auto px-3 pb-6">
-          {nav.map((item, i) => {
-            const active = item.activo && (item.to === "/" ? pathname === "/" : pathname.startsWith(item.to));
-            const Icon = item.icon;
-            if (!item.activo) {
-              return (
-                <div
-                  key={`${item.label}-${i}`}
-                  className="flex cursor-not-allowed items-center gap-3 rounded-md px-3 py-2 text-sm text-sidebar-foreground/35"
-                  title="Módulo ya construido: se integrará más adelante"
-                >
-                  <Icon className="size-4" />
-                  {item.label}
-                  <span className="ml-auto text-[10px] uppercase tracking-wide">próx.</span>
-                </div>
-              );
-            }
-            return (
-              <Link
-                key={`${item.label}-${i}`}
-                to={item.to}
-                className={cn(
-                  "flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors",
-                  active
-                    ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
-                    : "text-sidebar-foreground/80 hover:bg-sidebar-accent/60 hover:text-sidebar-accent-foreground",
-                )}
-              >
-                <Icon className="size-4" />
-                {item.label}
-              </Link>
-            );
-          })}
+          <NavLinks pathname={pathname} />
         </nav>
         <div className="border-t border-sidebar-border px-5 py-4 text-xs">
           <p className="font-medium">{usuarioActual.nombre}</p>
@@ -115,6 +119,15 @@ export function AppShell({
           >
             <ArrowLeft className="size-4" />
           </Button>
+          <Sheet open={menu} onOpenChange={setMenu}>
+            <SheetTrigger asChild>
+              <Button type="button" variant="outline" size="icon" aria-label="Abrir menú" className="md:hidden"><Menu className="size-4" /></Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-72 overflow-y-auto bg-sidebar p-3 pt-10 text-sidebar-foreground">
+              <SheetTitle className="px-3 pb-3 text-sm">MarketingHub AI</SheetTitle>
+              <NavLinks pathname={pathname} onNavigate={() => setMenu(false)} />
+            </SheetContent>
+          </Sheet>
           <div className="min-w-0 flex-1">
             <h1 className="truncate text-lg font-semibold md:text-xl">{title}</h1>
             {subtitle ? <p className="truncate text-sm text-muted-foreground">{subtitle}</p> : null}
@@ -125,7 +138,7 @@ export function AppShell({
           </div>
           {actions}
         </header>
-        <main className="flex-1 px-4 py-6 md:px-8">{children}</main>
+        <main className="min-w-0 flex-1 px-4 py-6 md:px-8">{children}</main>
       </div>
     </div>
   );
