@@ -66,9 +66,10 @@ function BandejaSalidaPage() {
     if (b && motivos.length) {
       registrarAuditoria({ modulo: "Bandeja de salida", accion: "Cambio bloqueado", detalle: motivos.join(" · "), clienteId: b.clienteId, anterior: b.estado, nuevo: cambios.estado, resultado: "bloqueado" });
       toast.error(`Bloqueado: ${motivos.join(" · ")}`);
-      return;
+      return false;
     }
     actualizarBorradorBase(id, cambios);
+    return true;
   };
   const [vista, setVista] = useState<"workflow" | "tabla">("workflow");
   const [filtroCanal, setFiltroCanal] = useState("todos");
@@ -98,8 +99,7 @@ function BandejaSalidaPage() {
 
   const accion = (cambios: Partial<Borrador>, mensaje: string) => {
     if (!actual) return;
-    actualizarBorrador(actual.id, cambios);
-    toast.success(mensaje);
+    if (actualizarBorrador(actual.id, cambios)) toast.success(mensaje);
   };
 
   return (
