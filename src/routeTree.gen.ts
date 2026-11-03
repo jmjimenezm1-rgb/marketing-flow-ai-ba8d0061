@@ -17,8 +17,18 @@ import { Route as CampanasIdRouteImport } from './routes/campanas.$id'
 import { Route as CampanasNuevaRouteImport } from './routes/campanas.nueva'
 import { Route as ClientesIndexRouteImport } from './routes/clientes.index'
 import { Route as ClientesIdRouteImport } from './routes/clientes.$id'
+import { Route as MarketingAuditoriaRouteImport } from './routes/marketing.auditoria'
+import { Route as MarketingBandejaEntradaRouteImport } from './routes/marketing.bandeja-entrada'
+import { Route as MarketingBandejaSalidaRouteImport } from './routes/marketing.bandeja-salida'
+import { Route as MarketingConsentimientosRouteImport } from './routes/marketing.consentimientos'
+import { Route as MarketingEnviosRouteImport } from './routes/marketing.envios'
+import { Route as MarketingSecuenciasRouteImport } from './routes/marketing.secuencias'
 import { Route as RevisionIndexRouteImport } from './routes/revision.index'
 import { Route as RevisionIdRouteImport } from './routes/revision.$id'
+import { Route as MarketingCatalystIndexRouteImport } from './routes/marketing.catalyst.index'
+import { Route as MarketingCatalystCampanasRouteImport } from './routes/marketing.catalyst.campanas'
+import { Route as MarketingCatalystClientesRouteImport } from './routes/marketing.catalyst.clientes'
+import { Route as MarketingCatalystProductosRouteImport } from './routes/marketing.catalyst.productos'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -60,6 +70,37 @@ const ClientesIdRoute = ClientesIdRouteImport.update({
   path: '/clientes/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingAuditoriaRoute = MarketingAuditoriaRouteImport.update({
+  id: '/marketing/auditoria',
+  path: '/marketing/auditoria',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingBandejaEntradaRoute = MarketingBandejaEntradaRouteImport.update({
+  id: '/marketing/bandeja-entrada',
+  path: '/marketing/bandeja-entrada',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingBandejaSalidaRoute = MarketingBandejaSalidaRouteImport.update({
+  id: '/marketing/bandeja-salida',
+  path: '/marketing/bandeja-salida',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingConsentimientosRoute =
+  MarketingConsentimientosRouteImport.update({
+    id: '/marketing/consentimientos',
+    path: '/marketing/consentimientos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingEnviosRoute = MarketingEnviosRouteImport.update({
+  id: '/marketing/envios',
+  path: '/marketing/envios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingSecuenciasRoute = MarketingSecuenciasRouteImport.update({
+  id: '/marketing/secuencias',
+  path: '/marketing/secuencias',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RevisionIndexRoute = RevisionIndexRouteImport.update({
   id: '/revision/',
   path: '/revision/',
@@ -70,6 +111,29 @@ const RevisionIdRoute = RevisionIdRouteImport.update({
   path: '/revision/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingCatalystIndexRoute = MarketingCatalystIndexRouteImport.update({
+  id: '/marketing/catalyst/',
+  path: '/marketing/catalyst/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingCatalystCampanasRoute =
+  MarketingCatalystCampanasRouteImport.update({
+    id: '/marketing/catalyst/campanas',
+    path: '/marketing/catalyst/campanas',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingCatalystClientesRoute =
+  MarketingCatalystClientesRouteImport.update({
+    id: '/marketing/catalyst/clientes',
+    path: '/marketing/catalyst/clientes',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const MarketingCatalystProductosRoute =
+  MarketingCatalystProductosRouteImport.update({
+    id: '/marketing/catalyst/productos',
+    path: '/marketing/catalyst/productos',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -78,10 +142,20 @@ export interface FileRoutesByFullPath {
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/clientes/': typeof ClientesIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -90,10 +164,20 @@ export interface FileRoutesByTo {
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas': typeof CampanasIndexRoute
   '/clientes': typeof ClientesIndexRoute
   '/revision': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -103,10 +187,20 @@ export interface FileRoutesById {
   '/campanas/$id': typeof CampanasIdRoute
   '/campanas/nueva': typeof CampanasNuevaRoute
   '/clientes/$id': typeof ClientesIdRoute
+  '/marketing/auditoria': typeof MarketingAuditoriaRoute
+  '/marketing/bandeja-entrada': typeof MarketingBandejaEntradaRoute
+  '/marketing/bandeja-salida': typeof MarketingBandejaSalidaRoute
+  '/marketing/consentimientos': typeof MarketingConsentimientosRoute
+  '/marketing/envios': typeof MarketingEnviosRoute
+  '/marketing/secuencias': typeof MarketingSecuenciasRoute
   '/revision/$id': typeof RevisionIdRoute
   '/campanas/': typeof CampanasIndexRoute
   '/clientes/': typeof ClientesIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
+  '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
+  '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -117,10 +211,20 @@ export interface FileRouteTypes {
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas/'
     | '/clientes/'
     | '/revision/'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -129,10 +233,20 @@ export interface FileRouteTypes {
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas'
     | '/clientes'
     | '/revision'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst'
   id:
     | '__root__'
     | '/'
@@ -141,10 +255,20 @@ export interface FileRouteTypes {
     | '/campanas/$id'
     | '/campanas/nueva'
     | '/clientes/$id'
+    | '/marketing/auditoria'
+    | '/marketing/bandeja-entrada'
+    | '/marketing/bandeja-salida'
+    | '/marketing/consentimientos'
+    | '/marketing/envios'
+    | '/marketing/secuencias'
     | '/revision/$id'
     | '/campanas/'
     | '/clientes/'
     | '/revision/'
+    | '/marketing/catalyst/campanas'
+    | '/marketing/catalyst/clientes'
+    | '/marketing/catalyst/productos'
+    | '/marketing/catalyst/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -154,10 +278,20 @@ export interface RootRouteChildren {
   CampanasIdRoute: typeof CampanasIdRoute
   CampanasNuevaRoute: typeof CampanasNuevaRoute
   ClientesIdRoute: typeof ClientesIdRoute
+  MarketingAuditoriaRoute: typeof MarketingAuditoriaRoute
+  MarketingBandejaEntradaRoute: typeof MarketingBandejaEntradaRoute
+  MarketingBandejaSalidaRoute: typeof MarketingBandejaSalidaRoute
+  MarketingConsentimientosRoute: typeof MarketingConsentimientosRoute
+  MarketingEnviosRoute: typeof MarketingEnviosRoute
+  MarketingSecuenciasRoute: typeof MarketingSecuenciasRoute
   RevisionIdRoute: typeof RevisionIdRoute
   CampanasIndexRoute: typeof CampanasIndexRoute
   ClientesIndexRoute: typeof ClientesIndexRoute
   RevisionIndexRoute: typeof RevisionIndexRoute
+  MarketingCatalystCampanasRoute: typeof MarketingCatalystCampanasRoute
+  MarketingCatalystClientesRoute: typeof MarketingCatalystClientesRoute
+  MarketingCatalystProductosRoute: typeof MarketingCatalystProductosRoute
+  MarketingCatalystIndexRoute: typeof MarketingCatalystIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -218,6 +352,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing/auditoria': {
+      id: '/marketing/auditoria'
+      path: '/marketing/auditoria'
+      fullPath: '/marketing/auditoria'
+      preLoaderRoute: typeof MarketingAuditoriaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/bandeja-entrada': {
+      id: '/marketing/bandeja-entrada'
+      path: '/marketing/bandeja-entrada'
+      fullPath: '/marketing/bandeja-entrada'
+      preLoaderRoute: typeof MarketingBandejaEntradaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/bandeja-salida': {
+      id: '/marketing/bandeja-salida'
+      path: '/marketing/bandeja-salida'
+      fullPath: '/marketing/bandeja-salida'
+      preLoaderRoute: typeof MarketingBandejaSalidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/consentimientos': {
+      id: '/marketing/consentimientos'
+      path: '/marketing/consentimientos'
+      fullPath: '/marketing/consentimientos'
+      preLoaderRoute: typeof MarketingConsentimientosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/envios': {
+      id: '/marketing/envios'
+      path: '/marketing/envios'
+      fullPath: '/marketing/envios'
+      preLoaderRoute: typeof MarketingEnviosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/secuencias': {
+      id: '/marketing/secuencias'
+      path: '/marketing/secuencias'
+      fullPath: '/marketing/secuencias'
+      preLoaderRoute: typeof MarketingSecuenciasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/revision/': {
       id: '/revision/'
       path: '/revision'
@@ -232,6 +408,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevisionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing/catalyst/': {
+      id: '/marketing/catalyst/'
+      path: '/marketing/catalyst'
+      fullPath: '/marketing/catalyst/'
+      preLoaderRoute: typeof MarketingCatalystIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/campanas': {
+      id: '/marketing/catalyst/campanas'
+      path: '/marketing/catalyst/campanas'
+      fullPath: '/marketing/catalyst/campanas'
+      preLoaderRoute: typeof MarketingCatalystCampanasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/clientes': {
+      id: '/marketing/catalyst/clientes'
+      path: '/marketing/catalyst/clientes'
+      fullPath: '/marketing/catalyst/clientes'
+      preLoaderRoute: typeof MarketingCatalystClientesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/catalyst/productos': {
+      id: '/marketing/catalyst/productos'
+      path: '/marketing/catalyst/productos'
+      fullPath: '/marketing/catalyst/productos'
+      preLoaderRoute: typeof MarketingCatalystProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -242,10 +446,20 @@ const rootRouteChildren: RootRouteChildren = {
   CampanasIdRoute: CampanasIdRoute,
   CampanasNuevaRoute: CampanasNuevaRoute,
   ClientesIdRoute: ClientesIdRoute,
+  MarketingAuditoriaRoute: MarketingAuditoriaRoute,
+  MarketingBandejaEntradaRoute: MarketingBandejaEntradaRoute,
+  MarketingBandejaSalidaRoute: MarketingBandejaSalidaRoute,
+  MarketingConsentimientosRoute: MarketingConsentimientosRoute,
+  MarketingEnviosRoute: MarketingEnviosRoute,
+  MarketingSecuenciasRoute: MarketingSecuenciasRoute,
   RevisionIdRoute: RevisionIdRoute,
   CampanasIndexRoute: CampanasIndexRoute,
   ClientesIndexRoute: ClientesIndexRoute,
   RevisionIndexRoute: RevisionIndexRoute,
+  MarketingCatalystCampanasRoute: MarketingCatalystCampanasRoute,
+  MarketingCatalystClientesRoute: MarketingCatalystClientesRoute,
+  MarketingCatalystProductosRoute: MarketingCatalystProductosRoute,
+  MarketingCatalystIndexRoute: MarketingCatalystIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

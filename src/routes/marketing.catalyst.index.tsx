@@ -73,10 +73,10 @@ function Index() {
         </p>
         <div className="mt-5 flex flex-wrap gap-2">
           <Button asChild>
-            <Link to="/envios">Ir a envíos</Link>
+            <Link to="/marketing/envios">Ir a envíos</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/bandeja-entrada">Ver respuestas recibidas</Link>
+            <Link to="/marketing/bandeja-entrada">Ver respuestas recibidas</Link>
           </Button>
         </div>
       </section>
