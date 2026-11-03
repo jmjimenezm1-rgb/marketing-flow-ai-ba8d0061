@@ -19,7 +19,6 @@ import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common
 import { useStore } from "@/marketing/catalyst/store";
 import { generarRespuesta, type TonoRespuesta } from "@/marketing/catalyst/services/ia";
 import {
-  getCliente,
   nombreCampana,
   nombreCliente,
   nombreProducto,
@@ -63,7 +62,8 @@ const INTENCIONES: Record<IntencionEntrada, string> = {
 const RESPONSABLES = ["L. Vega", "P. Ruiz", "S. Coll", "Compliance", "Sistema"];
 
 function BandejaEntradaPage() {
-  const { entradas, actualizarEntrada, añadirNota, crearBorradorIA } = useStore();
+  const { entradas, actualizarEntrada, añadirNota, crearBorradorIA, clientes: clientesSesion } = useStore();
+  const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
   const [seleccionada, setSeleccionada] = useState(entradas[0]?.id ?? "");
   const [filtroIntencion, setFiltroIntencion] = useState("todas");
   const [filtroEstado, setFiltroEstado] = useState("todos");

@@ -27,7 +27,8 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
 import { generarRespuesta } from "@/marketing/catalyst/services/ia";
-import { getCliente, nombreCampana, nombreCliente, nombreProducto, type Borrador } from "@/marketing/catalyst/mock/data";
+import { draftBlockReasons } from "@/marketing/catalyst/session";
+import { nombreCampana, nombreCliente, nombreProducto, type Borrador } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/bandeja-salida")({
   head: () => ({
@@ -57,7 +58,18 @@ const COLUMNAS: { estado: Borrador["estado"]; titulo: string }[] = [
 ];
 
 function BandejaSalidaPage() {
-  const { borradores, entradas, actualizarBorrador } = useStore();
+  const { borradores, entradas, actualizarBorrador: actualizarBorradorBase, clientes: clientesSesion, snapshot, registrarAuditoria } = useStore();
+  const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
+  const actualizarBorrador = (id: string, cambios: Partial<Borrador>) => {
+    const b = borradores.find((x) => x.id === id);
+    const motivos = b && cambios.estado ? draftBlockReasons(snapshot, { ...b, ...cambios, estado: b.estado }, cambios.estado) : [];
+    if (b && motivos.length) {
+      registrarAuditoria({ modulo: "Bandeja de salida", accion: "Cambio bloqueado", detalle: motivos.join(" · "), clienteId: b.clienteId, anterior: b.estado, nuevo: cambios.estado, resultado: "bloqueado" });
+      toast.error(`Bloqueado: ${motivos.join(" · ")}`);
+      return;
+    }
+    actualizarBorradorBase(id, cambios);
+  };
   const [vista, setVista] = useState<"workflow" | "tabla">("workflow");
   const [filtroCanal, setFiltroCanal] = useState("todos");
   const [filtroRiesgo, setFiltroRiesgo] = useState("todos");
