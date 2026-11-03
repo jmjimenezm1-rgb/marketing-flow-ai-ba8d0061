@@ -28,28 +28,28 @@ export const Route = createFileRoute("/marketing/catalyst/")({
 const modulos = [
   {
     n: 8,
-    url: "/envios",
+    url: "/marketing/envios",
     icon: Send,
     titulo: "Envíos",
     desc: "Individuales, masivos, por lotes, en secuencia y condicionados. Validación previa de consentimiento, bajas, canal, frecuencia y límites.",
   },
   {
     n: 9,
-    url: "/secuencias",
+    url: "/marketing/secuencias",
     icon: GitBranch,
     titulo: "Campañas evolutivas y secuencias",
     desc: "Pasos de refuerzo con orden, canal, plantilla, condición de activación, espera y adaptación de contenido con IA.",
   },
   {
     n: 10,
-    url: "/bandeja-entrada",
+    url: "/marketing/bandeja-entrada",
     icon: Inbox,
     titulo: "Bandeja de entrada",
     desc: "Respuestas unificadas de email y WhatsApp, clasificadas por intención comercial, con prioridad y próxima acción.",
   },
   {
     n: 11,
-    url: "/bandeja-salida",
+    url: "/marketing/bandeja-salida",
     icon: FileEdit,
     titulo: "Bandeja de salida y borradores",
     desc: "Workflow de respuestas generadas: revisión, aprobación, programación, envío y marcado para revisión legal.",

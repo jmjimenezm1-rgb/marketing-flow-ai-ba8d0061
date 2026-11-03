@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { StoreProvider } from "../lib/store";
+import { CatalystStoreProvider } from "../marketing/catalyst/store";
 import { Toaster } from "../components/ui/sonner";
 
 function NotFoundComponent() {
@@ -123,9 +124,11 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <StoreProvider>
+      <CatalystStoreProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
         <Toaster />
+      </CatalystStoreProvider>
       </StoreProvider>
     </QueryClientProvider>
   );
