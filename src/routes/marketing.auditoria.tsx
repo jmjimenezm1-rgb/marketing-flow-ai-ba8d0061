@@ -9,9 +9,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import { nombreCliente } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/auditoria")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Auditoría legal — MarketingHub AI" },
@@ -34,6 +36,8 @@ interface Fila {
 }
 
 function AuditoriaPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { envios, auditoria, borradores } = useStore();
   const [q, setQ] = useState("");
   const [modulo, setModulo] = useState("todos");
@@ -83,6 +87,7 @@ function AuditoriaPage() {
 
   return (
     <div className="space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Auditoría legal"
         subtitle="Registro inmutable de acciones: quién, cuándo, sobre qué contacto y en qué módulo. Exportable para responder a requerimientos o ejercicios de derechos."

@@ -116,11 +116,11 @@ function DetalleCampana() {
 
       <nav aria-label="Operación de la campaña" className="mb-4 flex flex-wrap gap-2 text-sm">
         <Link to="/revision" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Mensajes</Link>
-        <Link to="/marketing/secuencias" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Secuencia</Link>
-        <Link to="/marketing/envios" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Envíos</Link>
-        <Link to="/marketing/bandeja-entrada" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Respuestas</Link>
-        <Link to="/marketing/consentimientos" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Consentimiento</Link>
-        <Link to="/marketing/auditoria" className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Auditoría</Link>
+        <Link to="/marketing/secuencias" search={{ campana: id }} className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Secuencia</Link>
+        <Link to="/marketing/envios" search={{ campana: id }} className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Envíos</Link>
+        <Link to="/marketing/bandeja-entrada" search={{ campana: id }} className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Respuestas</Link>
+        <Link to="/marketing/consentimientos" search={{ campana: id }} className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Consentimiento</Link>
+        <Link to="/marketing/auditoria" search={{ campana: id }} className="rounded-md border bg-card px-3 py-1.5 hover:bg-muted">Auditoría</Link>
       </nav>
 
       <Tabs defaultValue="resumen">

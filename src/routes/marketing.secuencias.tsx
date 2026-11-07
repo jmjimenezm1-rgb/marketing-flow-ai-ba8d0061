@@ -26,9 +26,11 @@ import {
 } from "@/components/ui/dialog";
 import { KpiCard, PageHeader, Pill } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import { nombreCampana, nombreProducto, campanas, type CondicionPaso, type PasoSecuencia } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/secuencias")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Campañas evolutivas y secuencias — MarketingHub AI" },
@@ -87,8 +89,10 @@ const SEÑALES_IA = [
 ];
 
 function SecuenciasPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { secuencias, cambiarEstadoSecuencia, actualizarPaso } = useStore();
-  const [activa, setActiva] = useState(secuencias[0]?.id ?? "");
+  const [activa, setActiva] = useState((secuencias.find((s) => s.campanaId === catCampana) ?? secuencias[0])?.id ?? "");
   const [editando, setEditando] = useState<PasoSecuencia | null>(null);
   const [previsualizar, setPrevisualizar] = useState<PasoSecuencia | null>(null);
 
@@ -105,6 +109,7 @@ function SecuenciasPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Campañas evolutivas y secuencias"
         subtitle="Módulo 9 · Secuencias de refuerzo con orden, canal, plantilla, condición de activación, espera y segmento. Toda solicitud de baja detiene la secuencia y ningún paso sale sin revisión humana cuando está marcada."

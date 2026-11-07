@@ -21,9 +21,11 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import type { Canal, Cliente } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/consentimientos")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Consentimientos y bajas — MarketingHub AI" },
@@ -38,6 +40,8 @@ export const Route = createFileRoute("/marketing/consentimientos")({
 const CANALES: Canal[] = ["email", "whatsapp"];
 
 function ConsentimientosPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { clientes, registrarBaja, registrarConsentimiento } = useStore();
   const [q, setQ] = useState("");
   const [filtro, setFiltro] = useState("todos");
@@ -60,6 +64,7 @@ function ConsentimientosPage() {
 
   return (
     <div className="space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Consentimientos y bajas"
         subtitle="Estado de consentimiento por contacto y canal, base jurídica, fuente y lista interna de exclusión. Una baja cancela automáticamente los envíos pendientes."

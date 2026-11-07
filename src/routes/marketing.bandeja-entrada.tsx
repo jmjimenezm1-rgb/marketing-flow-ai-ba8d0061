@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import { generarRespuesta, type TonoRespuesta } from "@/marketing/catalyst/services/ia";
 import {
   nombreCampana,
@@ -27,6 +28,7 @@ import {
 } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/bandeja-entrada")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Bandeja de entrada — MarketingHub AI" },
@@ -62,6 +64,8 @@ const INTENCIONES: Record<IntencionEntrada, string> = {
 const RESPONSABLES = ["L. Vega", "P. Ruiz", "S. Coll", "Compliance", "Sistema"];
 
 function BandejaEntradaPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { entradas, actualizarEntrada, añadirNota, crearBorradorIA, clientes: clientesSesion } = useStore();
   const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
   const [seleccionada, setSeleccionada] = useState(entradas[0]?.id ?? "");
@@ -75,12 +79,13 @@ function BandejaEntradaPage() {
   const filtradas = useMemo(
     () =>
       entradas.filter((e) => {
+        if (flowCampana && e.campanaId !== catCampana) return false;
         if (filtroIntencion !== "todas" && e.intencion !== filtroIntencion) return false;
         if (filtroEstado !== "todos" && e.estado !== filtroEstado) return false;
         if (busqueda && !nombreCliente(e.clienteId).toLowerCase().includes(busqueda.toLowerCase())) return false;
         return true;
       }),
-    [entradas, filtroIntencion, filtroEstado, busqueda],
+    [entradas, flowCampana, catCampana, filtroIntencion, filtroEstado, busqueda],
   );
 
   const actual = entradas.find((e) => e.id === seleccionada) ?? filtradas[0];
@@ -110,6 +115,7 @@ function BandejaEntradaPage() {
 
   return (
     <div className="mx-auto max-w-[1500px] space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Bandeja de entrada"
         subtitle="Módulo 10 · Respuestas recibidas por email y WhatsApp, unificadas y clasificadas por intención comercial. No se etiquetan emociones ni atributos personales: solo intención respecto a la propuesta."
