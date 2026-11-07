@@ -35,6 +35,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import { validarEnvio } from "@/marketing/catalyst/services/compliance";
 import {
   campanas,
@@ -47,6 +48,7 @@ import {
 } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/envios")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Envíos — MarketingHub AI" },
@@ -77,12 +79,14 @@ const TIPOS: Record<Envio["tipo"], string> = {
 };
 
 function EnviosPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { envios, actualizarEnvio, clientes: clientesSesion, snapshot } = useStore();
   const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
   const [canal, setCanal] = useState("todos");
   const [estado, setEstado] = useState("todos");
   const [tipo, setTipo] = useState("todos");
-  const [campana, setCampana] = useState("todas");
+  const [campana, setCampana] = useState(catCampana ?? (flowCampana ? "ninguna" : "todas"));
   const [busqueda, setBusqueda] = useState("");
   const [seleccion, setSeleccion] = useState<string[]>([]);
   const [detalle, setDetalle] = useState<Envio | null>(null);
@@ -174,6 +178,7 @@ function EnviosPage() {
 
   return (
     <div className="mx-auto max-w-[1400px] space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Envíos"
         subtitle="Módulo 8 · Envíos individuales, masivos, por lotes, en secuencia y condicionados por respuesta. Ningún envío se ejecuta sin pasar la validación de consentimiento, bajas, canal, frecuencia y límites."

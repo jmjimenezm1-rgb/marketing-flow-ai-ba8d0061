@@ -26,11 +26,13 @@ import {
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
+import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
 import { generarRespuesta } from "@/marketing/catalyst/services/ia";
 import { draftBlockReasons } from "@/marketing/catalyst/session";
 import { nombreCampana, nombreCliente, nombreProducto, type Borrador } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/bandeja-salida")({
+  validateSearch: validateCampaignSearch,
   head: () => ({
     meta: [
       { title: "Bandeja de salida y borradores — MarketingHub AI" },
@@ -58,6 +60,8 @@ const COLUMNAS: { estado: Borrador["estado"]; titulo: string }[] = [
 ];
 
 function BandejaSalidaPage() {
+  const flowCampana = Route.useSearch().campana;
+  const catCampana = catalystCampaignFor(flowCampana);
   const { borradores, entradas, actualizarBorrador: actualizarBorradorBase, clientes: clientesSesion, snapshot, registrarAuditoria } = useStore();
   const getCliente = (id: string) => clientesSesion.find((c) => c.id === id);
   const actualizarBorrador = (id: string, cambios: Partial<Borrador>) => {
@@ -81,11 +85,12 @@ function BandejaSalidaPage() {
   const filtrados = useMemo(
     () =>
       borradores.filter((b) => {
+        if (flowCampana && b.campanaId !== catCampana) return false;
         if (filtroCanal !== "todos" && b.canal !== filtroCanal) return false;
         if (filtroRiesgo !== "todos" && b.riesgoLegal !== filtroRiesgo) return false;
         return true;
       }),
-    [borradores, filtroCanal, filtroRiesgo],
+    [borradores, flowCampana, catCampana, filtroCanal, filtroRiesgo],
   );
 
   const actual = borradores.find((b) => b.id === abierto);
@@ -104,6 +109,7 @@ function BandejaSalidaPage() {
 
   return (
     <div className="mx-auto max-w-[1500px] space-y-6 p-4 md:p-8">
+      <CampaignBanner flowId={flowCampana} />
       <PageHeader
         title="Bandeja de salida y borradores"
         subtitle="Módulo 11 · Respuestas generadas y no enviadas, en flujo de revisión humana. Ninguna respuesta sale sin aprobación, y las de riesgo legal alto requieren visto bueno de cumplimiento."
