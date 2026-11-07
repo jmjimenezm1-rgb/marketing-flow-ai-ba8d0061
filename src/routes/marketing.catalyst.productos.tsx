@@ -65,7 +65,7 @@ function ProductosPage() {
       <section className="grid gap-4 md:grid-cols-2 [&>*]:min-w-0">
         {fichas.map(({ p, campanasProducto, mensajesProducto, enviosProducto, respuestas, porEmail, porWhatsapp, riesgoAlto }) => (
           <article key={p.id} className="rounded-xl border border-border bg-card p-5 shadow-panel">
-            <div className="flex items-start justify-between gap-3">
+            <div className="flex flex-wrap items-start justify-between gap-3">
               <div className="flex items-center gap-3">
                 <span className="flex size-10 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
                   <Package className="size-5" />
