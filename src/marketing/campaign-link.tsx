@@ -9,13 +9,13 @@ export const FLOW_TO_CATALYST: Record<string, string> = { cam1: "c1", cam2: "c2"
 
 export type CampaignSearch = { campana?: string };
 export const validateCampaignSearch = (s: Record<string, unknown>): CampaignSearch =>
-  typeof s.campana === "string" ? { campana: s.campana } : {};
+  typeof s["campana"] === "string" ? { campana: s["campana"] } : {};
 
 export function catalystCampaignFor(flowId?: string) {
   return flowId ? FLOW_TO_CATALYST[flowId] : undefined;
 }
 
-export function CampaignBanner({ flowId }: { flowId?: string }) {
+export function CampaignBanner({ flowId }: { flowId?: string | undefined }) {
   if (!flowId) return null;
   const flow = flowCampanas.find((c) => c.id === flowId);
   const cat = catalystCampaignFor(flowId);
