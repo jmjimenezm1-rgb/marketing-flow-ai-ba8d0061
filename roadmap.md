@@ -1,11 +1,12 @@
 # MarketingHub AI
 
 ## Parallel fusion — mock-only phase
-- [ ] Inventory Marketing Flow and GitHub Marketing Catalyst, preserving every screen and behavior.
-- [ ] Present integration plan and resolve duplicate routes without substituting screens.
-- [ ] Integrate shared shell, temporary stores, campaign/message/sequence/send/reply links.
-- [ ] Preserve consent, human review, legal blocking, and temporal audit with tests.
-- [ ] Verify both areas and integration flows on desktop, tablet, and mobile.
+- [x] Inventory Marketing Flow and GitHub Marketing Catalyst, preserving every screen and behavior.
+- [x] Present integration plan and resolve duplicate routes without substituting screens.
+- [x] Integrate shared shell, temporary stores and screens.
+- [ ] Campaign shortcuts filtered to the source campaign with return link.
+- [x] Preserve consent, human review, legal blocking, and temporal audit with tests.
+- [x] Verify both areas and integration flows on desktop, tablet, and mobile.
 - Constraint: no tables, migrations, schema changes, secrets, real providers, or authentication in this phase.
 
 - [x] Verify Clients and leads, including links to each contact's messages.

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/marketing/auditoria")({
       { property: "og:description", content: "Trazabilidad completa de quién hizo qué y cuándo, exportable a CSV." },
     ],
   }),
-  component: () => <AppShell title="Auditoría"><AuditoriaPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><AuditoriaPage /></AppShell>,
 });
 
 interface Fila {

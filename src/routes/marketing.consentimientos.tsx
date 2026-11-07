@@ -32,7 +32,7 @@ export const Route = createFileRoute("/marketing/consentimientos")({
       { property: "og:description", content: "Control RGPD/LSSI-CE de consentimiento por canal y lista de exclusión." },
     ],
   }),
-  component: () => <AppShell title="Consentimientos y bajas"><ConsentimientosPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><ConsentimientosPage /></AppShell>,
 });
 
 const CANALES: Canal[] = ["email", "whatsapp"];

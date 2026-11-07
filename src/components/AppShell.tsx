@@ -72,7 +72,9 @@ export function AppShell({
   subtitle,
   actions,
   children,
+  pageHeading = false,
 }: {
+  pageHeading?: boolean;
   title: string;
   subtitle?: string;
   actions?: ReactNode;
@@ -129,7 +131,7 @@ export function AppShell({
             </SheetContent>
           </Sheet>
           <div className="min-w-0 flex-1">
-            <h1 className="truncate text-lg font-semibold md:text-xl">{title}</h1>
+            {pageHeading ? <p className="truncate text-sm font-semibold uppercase tracking-wide text-muted-foreground">{title}</p> : <h1 className="truncate text-lg font-semibold md:text-xl">{title}</h1>}
             {subtitle ? <p className="truncate text-sm text-muted-foreground">{subtitle}</p> : null}
           </div>
           <div className="hidden items-center gap-2 rounded-md border bg-background px-3 py-1.5 text-sm text-muted-foreground lg:flex">

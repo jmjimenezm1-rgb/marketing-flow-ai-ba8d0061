@@ -62,7 +62,7 @@ export const Route = createFileRoute("/marketing/envios")({
       },
     ],
   }),
-  component: () => <AppShell title="Envíos"><EnviosPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><EnviosPage /></AppShell>,
 });
 
 const TIPOS: Record<Envio["tipo"], string> = {

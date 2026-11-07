@@ -44,7 +44,7 @@ export const Route = createFileRoute("/marketing/secuencias")({
       },
     ],
   }),
-  component: () => <AppShell title="Secuencias"><SecuenciasPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><SecuenciasPage /></AppShell>,
 });
 
 const CONDICIONES: Record<CondicionPaso, string> = {

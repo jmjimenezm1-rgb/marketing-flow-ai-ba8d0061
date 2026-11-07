@@ -37,10 +37,13 @@ import { Route as MarketingRevisionRouteImport } from './routes/marketing.revisi
 import { Route as MarketingSecuenciasRouteImport } from './routes/marketing.secuencias'
 import { Route as RevisionIndexRouteImport } from './routes/revision.index'
 import { Route as RevisionIdRouteImport } from './routes/revision.$id'
+import { Route as MarketingCampanasIdRouteImport } from './routes/marketing.campanas_.$id'
 import { Route as MarketingCatalystIndexRouteImport } from './routes/marketing.catalyst.index'
 import { Route as MarketingCatalystCampanasRouteImport } from './routes/marketing.catalyst.campanas'
 import { Route as MarketingCatalystClientesRouteImport } from './routes/marketing.catalyst.clientes'
 import { Route as MarketingCatalystProductosRouteImport } from './routes/marketing.catalyst.productos'
+import { Route as MarketingClientesIdRouteImport } from './routes/marketing.clientes_.$id'
+import { Route as MarketingRevisionIdRouteImport } from './routes/marketing.revision_.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -183,6 +186,11 @@ const RevisionIdRoute = RevisionIdRouteImport.update({
   path: '/revision/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MarketingCampanasIdRoute = MarketingCampanasIdRouteImport.update({
+  id: '/marketing/campanas_/$id',
+  path: '/marketing/campanas/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MarketingCatalystIndexRoute = MarketingCatalystIndexRouteImport.update({
   id: '/marketing/catalyst/',
   path: '/marketing/catalyst/',
@@ -206,6 +214,16 @@ const MarketingCatalystProductosRoute =
     path: '/marketing/catalyst/productos',
     getParentRoute: () => rootRouteImport,
   } as any)
+const MarketingClientesIdRoute = MarketingClientesIdRouteImport.update({
+  id: '/marketing/clientes_/$id',
+  path: '/marketing/clientes/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarketingRevisionIdRoute = MarketingRevisionIdRouteImport.update({
+  id: '/marketing/revision_/$id',
+  path: '/marketing/revision/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -236,9 +254,12 @@ export interface FileRoutesByFullPath {
   '/clientes/': typeof ClientesIndexRoute
   '/marketing/': typeof MarketingIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/campanas/$id': typeof MarketingCampanasIdRoute
   '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
   '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
   '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/clientes/$id': typeof MarketingClientesIdRoute
+  '/marketing/revision/$id': typeof MarketingRevisionIdRoute
   '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesByTo {
@@ -270,9 +291,12 @@ export interface FileRoutesByTo {
   '/clientes': typeof ClientesIndexRoute
   '/marketing': typeof MarketingIndexRoute
   '/revision': typeof RevisionIndexRoute
+  '/marketing/campanas/$id': typeof MarketingCampanasIdRoute
   '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
   '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
   '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/clientes/$id': typeof MarketingClientesIdRoute
+  '/marketing/revision/$id': typeof MarketingRevisionIdRoute
   '/marketing/catalyst': typeof MarketingCatalystIndexRoute
 }
 export interface FileRoutesById {
@@ -305,9 +329,12 @@ export interface FileRoutesById {
   '/clientes/': typeof ClientesIndexRoute
   '/marketing/': typeof MarketingIndexRoute
   '/revision/': typeof RevisionIndexRoute
+  '/marketing/campanas_/$id': typeof MarketingCampanasIdRoute
   '/marketing/catalyst/campanas': typeof MarketingCatalystCampanasRoute
   '/marketing/catalyst/clientes': typeof MarketingCatalystClientesRoute
   '/marketing/catalyst/productos': typeof MarketingCatalystProductosRoute
+  '/marketing/clientes_/$id': typeof MarketingClientesIdRoute
+  '/marketing/revision_/$id': typeof MarketingRevisionIdRoute
   '/marketing/catalyst/': typeof MarketingCatalystIndexRoute
 }
 export interface FileRouteTypes {
@@ -341,9 +368,12 @@ export interface FileRouteTypes {
     | '/clientes/'
     | '/marketing/'
     | '/revision/'
+    | '/marketing/campanas/$id'
     | '/marketing/catalyst/campanas'
     | '/marketing/catalyst/clientes'
     | '/marketing/catalyst/productos'
+    | '/marketing/clientes/$id'
+    | '/marketing/revision/$id'
     | '/marketing/catalyst/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -375,9 +405,12 @@ export interface FileRouteTypes {
     | '/clientes'
     | '/marketing'
     | '/revision'
+    | '/marketing/campanas/$id'
     | '/marketing/catalyst/campanas'
     | '/marketing/catalyst/clientes'
     | '/marketing/catalyst/productos'
+    | '/marketing/clientes/$id'
+    | '/marketing/revision/$id'
     | '/marketing/catalyst'
   id:
     | '__root__'
@@ -409,9 +442,12 @@ export interface FileRouteTypes {
     | '/clientes/'
     | '/marketing/'
     | '/revision/'
+    | '/marketing/campanas_/$id'
     | '/marketing/catalyst/campanas'
     | '/marketing/catalyst/clientes'
     | '/marketing/catalyst/productos'
+    | '/marketing/clientes_/$id'
+    | '/marketing/revision_/$id'
     | '/marketing/catalyst/'
   fileRoutesById: FileRoutesById
 }
@@ -444,9 +480,12 @@ export interface RootRouteChildren {
   ClientesIndexRoute: typeof ClientesIndexRoute
   MarketingIndexRoute: typeof MarketingIndexRoute
   RevisionIndexRoute: typeof RevisionIndexRoute
+  MarketingCampanasIdRoute: typeof MarketingCampanasIdRoute
   MarketingCatalystCampanasRoute: typeof MarketingCatalystCampanasRoute
   MarketingCatalystClientesRoute: typeof MarketingCatalystClientesRoute
   MarketingCatalystProductosRoute: typeof MarketingCatalystProductosRoute
+  MarketingClientesIdRoute: typeof MarketingClientesIdRoute
+  MarketingRevisionIdRoute: typeof MarketingRevisionIdRoute
   MarketingCatalystIndexRoute: typeof MarketingCatalystIndexRoute
 }
 
@@ -648,6 +687,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RevisionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/marketing/campanas_/$id': {
+      id: '/marketing/campanas_/$id'
+      path: '/marketing/campanas/$id'
+      fullPath: '/marketing/campanas/$id'
+      preLoaderRoute: typeof MarketingCampanasIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/marketing/catalyst/': {
       id: '/marketing/catalyst/'
       path: '/marketing/catalyst'
@@ -674,6 +720,20 @@ declare module '@tanstack/react-router' {
       path: '/marketing/catalyst/productos'
       fullPath: '/marketing/catalyst/productos'
       preLoaderRoute: typeof MarketingCatalystProductosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/clientes_/$id': {
+      id: '/marketing/clientes_/$id'
+      path: '/marketing/clientes/$id'
+      fullPath: '/marketing/clientes/$id'
+      preLoaderRoute: typeof MarketingClientesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marketing/revision_/$id': {
+      id: '/marketing/revision_/$id'
+      path: '/marketing/revision/$id'
+      fullPath: '/marketing/revision/$id'
+      preLoaderRoute: typeof MarketingRevisionIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -708,9 +768,12 @@ const rootRouteChildren: RootRouteChildren = {
   ClientesIndexRoute: ClientesIndexRoute,
   MarketingIndexRoute: MarketingIndexRoute,
   RevisionIndexRoute: RevisionIndexRoute,
+  MarketingCampanasIdRoute: MarketingCampanasIdRoute,
   MarketingCatalystCampanasRoute: MarketingCatalystCampanasRoute,
   MarketingCatalystClientesRoute: MarketingCatalystClientesRoute,
   MarketingCatalystProductosRoute: MarketingCatalystProductosRoute,
+  MarketingClientesIdRoute: MarketingClientesIdRoute,
+  MarketingRevisionIdRoute: MarketingRevisionIdRoute,
   MarketingCatalystIndexRoute: MarketingCatalystIndexRoute,
 }
 export const routeTree = rootRouteImport

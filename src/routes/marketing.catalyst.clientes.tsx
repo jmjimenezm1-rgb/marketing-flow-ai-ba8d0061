@@ -49,7 +49,7 @@ export const Route = createFileRoute("/marketing/catalyst/clientes")({
       },
     ],
   }),
-  component: () => <AppShell title="Catalyst · Clientes"><ClientesPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><ClientesPage /></AppShell>,
 });
 
 const ETIQUETA_CONSENTIMIENTO: Record<string, string> = {

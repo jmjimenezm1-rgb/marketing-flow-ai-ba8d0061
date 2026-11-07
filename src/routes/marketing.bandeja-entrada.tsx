@@ -42,7 +42,7 @@ export const Route = createFileRoute("/marketing/bandeja-entrada")({
       },
     ],
   }),
-  component: () => <AppShell title="Bandeja de entrada"><BandejaEntradaPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><BandejaEntradaPage /></AppShell>,
 });
 
 const INTENCIONES: Record<IntencionEntrada, string> = {
@@ -127,7 +127,7 @@ function BandejaEntradaPage() {
         />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-[380px_1fr]">
+      <div className="grid gap-4 lg:grid-cols-[380px_1fr] [&>*]:min-w-0">
         {/* Lista */}
         <div className="space-y-3">
           <div className="space-y-2 rounded-xl border border-border bg-card p-3 shadow-panel">
