@@ -41,7 +41,7 @@ export const Route = createFileRoute("/marketing/catalyst/campanas")({
       },
     ],
   }),
-  component: () => <AppShell title="Catalyst · Campañas"><CampanasPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><CampanasPage /></AppShell>,
 });
 
 // Flujo permitido: ninguna campaña se activa sin pasar por revisión y aprobación.

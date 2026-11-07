@@ -22,7 +22,7 @@ export const Route = createFileRoute("/marketing/catalyst/")({
       },
     ],
   }),
-  component: () => <AppShell title="Catalyst · Operación"><Index /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><Index /></AppShell>,
 });
 
 const modulos = [

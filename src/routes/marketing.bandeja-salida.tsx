@@ -46,7 +46,7 @@ export const Route = createFileRoute("/marketing/bandeja-salida")({
       },
     ],
   }),
-  component: () => <AppShell title="Bandeja de salida"><BandejaSalidaPage /></AppShell>,
+  component: () => <AppShell title="Marketing Catalyst" pageHeading><BandejaSalidaPage /></AppShell>,
 });
 
 const COLUMNAS: { estado: Borrador["estado"]; titulo: string }[] = [
