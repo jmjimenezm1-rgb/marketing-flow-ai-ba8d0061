@@ -3,6 +3,7 @@ import { Megaphone, Sparkles, ClipboardCheck, ShieldAlert, ArrowRight } from "lu
 import { AppShell } from "@/components/AppShell";
 import { StatusBadge } from "@/components/StatusBadge";
 import { useStore } from "@/lib/store";
+import { useMarketingDomain } from "@/marketing/domain/store";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,21 +26,30 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function Kpi({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
+const etiquetaProcedencia: Record<string, string> = {
+  flow: "Flow",
+  catalyst: "Catalyst",
+  consolidado: "Consolidado temporal",
+};
+
+function Kpi({ label, value, hint, procedencia }: { label: string; value: number | string; hint?: string; procedencia?: string }) {
   return (
     <div className="rounded-xl border bg-card p-4 shadow-panel">
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>
       <p className="mt-1 font-display text-2xl font-semibold">{value}</p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
+      {procedencia ? <p className="mt-1 text-[11px] text-muted-foreground/70">Fuente: {etiquetaProcedencia[procedencia] ?? procedencia}</p> : null}
     </div>
   );
 }
 
 function Index() {
   const { campanas, mensajes, clientes } = useStore();
-  const pendientes = mensajes.filter((m) => m.estado === "pendiente_revision").length;
-  const bloqueados = mensajes.filter((m) => m.riesgoLegal === "bloqueante").length;
-  const sinConsent = clientes.filter((c) => c.consentimiento.email === "ausente").length;
+  const { indicadores } = useMarketingDomain();
+  const ind = (clave: string) => indicadores.find((i) => i.clave === clave);
+  const pendientes = ind("mensajes_pendientes")?.valor ?? 0;
+  const bloqueados = ind("mensajes_bloqueados")?.valor ?? 0;
+  const sinConsent = ind("sin_consentimiento")?.valor ?? 0;
 
   const modulos = [
     {
@@ -68,10 +78,14 @@ function Index() {
       subtitle="Vista general de campañas, generación y revisión (datos ficticios de demostración)"
     >
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Kpi label="Campañas activas" value={campanas.filter((c) => c.estado === "activa").length} />
-        <Kpi label="Campañas programadas" value={campanas.filter((c) => c.estado === "programada").length} />
-        <Kpi label="Mensajes pendientes de revisión" value={pendientes} hint="Requieren revisión humana" />
-        <Kpi label="Mensajes bloqueados" value={bloqueados} hint="Sin base jurídica válida" />
+        <Kpi label="Campañas activas" value={ind("campanas_activas")?.valor ?? 0} procedencia={ind("campanas_activas")?.procedencia} />
+        <Kpi label="Campañas programadas" value={ind("campanas_programadas")?.valor ?? 0} procedencia={ind("campanas_programadas")?.procedencia} />
+        <Kpi label="Mensajes pendientes de revisión" value={pendientes} hint="Requieren revisión humana" procedencia={ind("mensajes_pendientes")?.procedencia} />
+        <Kpi label="Mensajes bloqueados" value={bloqueados} hint="Sin base jurídica válida" procedencia={ind("mensajes_bloqueados")?.procedencia} />
+        <Kpi label="Envíos pendientes" value={ind("envios_pendientes")?.valor ?? 0} procedencia={ind("envios_pendientes")?.procedencia} />
+        <Kpi label="Envíos realizados" value={ind("envios_realizados")?.valor ?? 0} procedencia={ind("envios_realizados")?.procedencia} />
+        <Kpi label="Respuestas pendientes" value={ind("respuestas_pendientes")?.valor ?? 0} procedencia={ind("respuestas_pendientes")?.procedencia} />
+        <Kpi label="Contactos dados de baja" value={ind("bajas")?.valor ?? 0} procedencia={ind("bajas")?.procedencia} />
       </div>
 
       {(bloqueados > 0 || sinConsent > 0) && (
