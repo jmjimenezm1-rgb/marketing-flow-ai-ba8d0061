@@ -6,8 +6,11 @@
 
 import type { Campana as FlowCampana } from "@/lib/mock-data";
 import type { Campana as CatalystCampana } from "@/marketing/catalyst/mock/data";
-import { FLOW_TO_CATALYST } from "@/marketing/campaign-link";
 import type { DomainCampaign, EstadoCampanaComun, ResolucionCampana } from "./types";
+
+// Semilla de compatibilidad de datos iniciales (antes mapa fijo en campaign-link).
+// Solo se usa para arrancar el registro; las relaciones nuevas no dependen de él.
+export const FLOW_TO_CATALYST: Record<string, string> = { cam1: "c1", cam2: "c2", cam3: "c3", cam4: "c4" };
 
 export interface CampaignLink {
   relationId: string;
