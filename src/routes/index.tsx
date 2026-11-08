@@ -32,7 +32,7 @@ const etiquetaProcedencia: Record<string, string> = {
   consolidado: "Consolidado temporal",
 };
 
-function Kpi({ label, value, hint, procedencia }: { label: string; value: number | string; hint?: string; procedencia?: string }) {
+function Kpi({ label, value, hint, procedencia }: { label: string; value: number | string; hint?: string | undefined; procedencia?: string | undefined }) {
   return (
     <div className="rounded-xl border bg-card p-4 shadow-panel">
       <p className="text-xs uppercase tracking-wide text-muted-foreground">{label}</p>

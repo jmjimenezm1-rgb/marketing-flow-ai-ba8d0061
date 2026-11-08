@@ -25,16 +25,16 @@ export interface MarketingClient {
   razonSocial: string;
   contacto: string;
   cargo: string;
-  email?: string;
-  whatsapp?: string;
+  email?: string | undefined;
+  whatsapp?: string | undefined;
   sector: string;
   responsable: string;
-  estadoComercial?: string;
-  segmento?: string;
+  estadoComercial?: string | undefined;
+  segmento?: string | undefined;
   consentimiento: Record<Canal, EstadoConsentimientoComun>;
   baseJuridica: string;
   fuenteDato: string;
-  fechaConsentimiento?: string | null;
+  fechaConsentimiento?: string | null | undefined;
   baja: { activa: boolean; canales: Canal[] };
   historial: { fecha: string; usuario: string; accion: string }[];
   original: FlowCliente | CatalystCliente;
@@ -45,11 +45,11 @@ export interface DomainProduct {
   id: string;
   procedencia: Procedencia;
   nombre: string;
-  descripcionCorta?: string;
-  publicoObjetivo?: string;
+  descripcionCorta?: string | undefined;
+  publicoObjetivo?: string | undefined;
   beneficios: string[];
   objeciones: string[];
-  estado?: string;
+  estado?: string | undefined;
   original: FlowProducto | CatalystProducto;
 }
 
@@ -67,14 +67,14 @@ export type EstadoCampanaComun =
 export interface DomainCampaign {
   /** Identificador común de la relación (no hardcodeado: se genera al vincular). */
   relationId: string;
-  flowId?: string;
-  catalystId?: string;
+  flowId?: string | undefined;
+  catalystId?: string | undefined;
   nombre: string;
   productoId: string;
-  objetivo?: string;
+  objetivo?: string | undefined;
   estado: EstadoCampanaComun;
   canal: Canal | "mixto";
-  responsable?: string;
+  responsable?: string | undefined;
   /** true si la campaña Catalyst fue derivada temporalmente desde Flow. */
   catalystDerivada: boolean;
 }
@@ -83,8 +83,8 @@ export type EstadoRelacionCampana = "vinculada" | "sin_relacion" | "no_existe";
 
 export interface ResolucionCampana {
   estado: EstadoRelacionCampana;
-  campana?: DomainCampaign;
-  motivo?: string;
+  campana?: DomainCampaign | undefined;
+  motivo?: string | undefined;
 }
 
 /** Evento de auditoría unificado (contrato AuditService). */
@@ -96,10 +96,10 @@ export interface AuditEventComun {
   accion: string;
   detalle: string;
   procedencia: Procedencia;
-  clienteId?: string;
-  campanaId?: string;
+  clienteId?: string | undefined;
+  campanaId?: string | undefined;
   anterior?: unknown;
   nuevo?: unknown;
-  resultado?: "realizado" | "bloqueado";
-  motivo?: string;
+  resultado?: "realizado" | "bloqueado" | undefined;
+  motivo?: string | undefined;
 }
