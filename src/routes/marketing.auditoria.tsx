@@ -9,7 +9,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { KpiCard, PageHeader, Pill, fecha } from "@/marketing/catalyst/ui/common";
 import { useStore } from "@/marketing/catalyst/store";
-import { CampaignBanner, catalystCampaignFor, validateCampaignSearch } from "@/marketing/campaign-link";
+import { CampaignBanner, validateCampaignSearch } from "@/marketing/campaign-link";
+import { useMarketingDomain } from "@/marketing/domain/store";
 import { nombreCliente } from "@/marketing/catalyst/mock/data";
 
 export const Route = createFileRoute("/marketing/auditoria")({
@@ -20,6 +21,8 @@ export const Route = createFileRoute("/marketing/auditoria")({
       { name: "description", content: "Registro unificado y exportable de acciones sobre envíos, consentimientos y respuestas." },
       { property: "og:title", content: "Auditoría legal — MarketingHub AI" },
       { property: "og:description", content: "Trazabilidad completa de quién hizo qué y cuándo, exportable a CSV." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: () => <AppShell title="Marketing Catalyst" pageHeading><AuditoriaPage /></AppShell>,
@@ -33,39 +36,27 @@ interface Fila {
   accion: string;
   detalle: string;
   cliente: string;
+  origen: string;
 }
 
 function AuditoriaPage() {
   const flowCampana = Route.useSearch().campana;
-  const catCampana = catalystCampaignFor(flowCampana);
-  const { envios, auditoria, borradores } = useStore();
+  const { envios, borradores } = useStore();
+  const { auditoriaComun, resolverCampanaFlow } = useMarketingDomain();
   const [q, setQ] = useState("");
   const [modulo, setModulo] = useState("todos");
+  const catCampana = flowCampana ? resolverCampanaFlow(flowCampana).campana?.catalystId : undefined;
 
-  const filas = useMemo<Fila[]>(() => {
-    const deEnvios = envios.flatMap((e) =>
-      e.historial.map((h, i) => ({
-        id: `${e.id}-${i}`,
-        fecha: h.fecha,
-        usuario: h.usuario,
-        modulo: "Envíos",
-        accion: h.evento,
-        detalle: `${e.id} · ${e.canal}`,
-        cliente: nombreCliente(e.clienteId),
+  const filas = useMemo<Fila[]>(() =>
+    auditoriaComun
+      .filter((a) => !flowCampana || a.campanaId === flowCampana || (!!catCampana && a.campanaId === catCampana))
+      .map((a) => ({
+        id: a.id, fecha: a.fecha, usuario: a.usuario, modulo: a.modulo, accion: a.accion, detalle: a.detalle,
+        cliente: a.clienteId ? nombreCliente(a.clienteId) : "—",
+        origen: a.procedencia === "flow" ? "Flow" : "Catalyst",
       })),
-    );
-    const deBorradores = borradores.map((b) => ({
-      id: b.id,
-      fecha: b.creado,
-      usuario: b.responsable,
-      modulo: "Bandeja de salida",
-      accion: `Borrador ${b.estado.replace(/_/g, " ")}`,
-      detalle: `${b.canal} · riesgo ${b.riesgoLegal}${b.revisionLegal ? " · revisión legal" : ""}`,
-      cliente: nombreCliente(b.clienteId),
-    }));
-    const globales = auditoria.map((a) => ({ ...a, cliente: a.clienteId ? nombreCliente(a.clienteId) : "—" }));
-    return [...globales, ...deEnvios, ...deBorradores].sort((a, b) => b.fecha.localeCompare(a.fecha));
-  }, [envios, auditoria, borradores]);
+  [auditoriaComun, flowCampana, catCampana]);
+  const modulos = Array.from(new Set(filas.map((f) => f.modulo)));
 
   const visibles = filas.filter(
     (f) =>
@@ -74,9 +65,9 @@ function AuditoriaPage() {
   );
 
   const exportar = () => {
-    const cab = ["fecha", "usuario", "modulo", "accion", "cliente", "detalle"];
+    const cab = ["fecha", "origen", "usuario", "modulo", "accion", "cliente", "detalle"];
     const esc = (v: string) => `"${v.replace(/"/g, '""')}"`;
-    const csv = [cab.join(","), ...visibles.map((f) => [f.fecha, f.usuario, f.modulo, f.accion, f.cliente, f.detalle].map(esc).join(","))].join("\n");
+    const csv = [cab.join(","), ...visibles.map((f) => [f.fecha, f.origen, f.usuario, f.modulo, f.accion, f.cliente, f.detalle].map(esc).join(","))].join("\n");
     const url = URL.createObjectURL(new Blob([csv], { type: "text/csv;charset=utf-8" }));
     const a = document.createElement("a");
     a.href = url;
@@ -109,9 +100,7 @@ function AuditoriaPage() {
           <SelectTrigger className="w-52"><SelectValue /></SelectTrigger>
           <SelectContent>
             <SelectItem value="todos">Todos los módulos</SelectItem>
-            <SelectItem value="Envíos">Envíos</SelectItem>
-            <SelectItem value="Bandeja de salida">Bandeja de salida</SelectItem>
-            <SelectItem value="Consentimientos">Consentimientos</SelectItem>
+            {modulos.map((m) => <SelectItem key={m} value={m}>{m}</SelectItem>)}
           </SelectContent>
         </Select>
       </div>
@@ -120,6 +109,7 @@ function AuditoriaPage() {
           <TableHeader>
             <TableRow>
               <TableHead>Fecha</TableHead>
+              <TableHead>Origen</TableHead>
               <TableHead>Módulo</TableHead>
               <TableHead>Acción</TableHead>
               <TableHead>Contacto</TableHead>
@@ -131,6 +121,7 @@ function AuditoriaPage() {
             {visibles.map((f) => (
               <TableRow key={f.id}>
                 <TableCell className="whitespace-nowrap text-sm">{fecha(f.fecha)}</TableCell>
+                <TableCell className="text-sm">{f.origen}</TableCell>
                 <TableCell><Pill tone="outline" label={f.modulo} /></TableCell>
                 <TableCell className="text-sm font-medium">{f.accion}</TableCell>
                 <TableCell className="text-sm">{f.cliente}</TableCell>
@@ -139,7 +130,7 @@ function AuditoriaPage() {
               </TableRow>
             ))}
             {visibles.length === 0 && (
-              <TableRow><TableCell colSpan={6} className="py-8 text-center text-sm text-muted-foreground">Sin eventos.</TableCell></TableRow>
+              <TableRow><TableCell colSpan={7} className="py-8 text-center text-sm text-muted-foreground">Sin eventos.</TableCell></TableRow>
             )}
           </TableBody>
         </Table>
